@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 // // src/components/GLBViewer.js
 // import './GLBViewer.css';
 // import * as THREE from 'three';
@@ -109,10 +111,9 @@
 
 // export default GLBViewer;
 
-// src/components/GLBViewer.js
 import './GLBViewer.css';
 import * as THREE from 'three';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
@@ -120,7 +121,7 @@ const GLBViewer = ({ modelPath, modelColor, noControls, x, y, z }) => {
     const mountRef = useRef(null);
 
     useEffect(() => {
-        const scene = new THREE.Scene();
+        let scene = new THREE.Scene();
         scene.background = null;
 
         const camera = new THREE.PerspectiveCamera(
@@ -197,8 +198,9 @@ const GLBViewer = ({ modelPath, modelColor, noControls, x, y, z }) => {
                     const mouseX = (event.clientX / window.innerWidth) * 2 - 1;
                     const mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
 
-                    model.rotation.y = mouseX * 0.5; // Adjust rotation sensitivity
-                    model.rotation.x = mouseY * 0.5;
+                    scene.rotation.y = mouseX * 0.5; // Adjust rotation sensitivity
+                    scene.rotation.x = mouseY * 0.5;
+
                 };
 
                 window.addEventListener('mousemove', onMouseMove);
@@ -224,7 +226,7 @@ const GLBViewer = ({ modelPath, modelColor, noControls, x, y, z }) => {
         return () => {
             mountRef.current.removeChild(renderer.domElement);
         };
-    }, [modelPath, modelColor]);
+    }, [modelPath, modelColor, x, y, z, noControls]);
 
     return <div ref={mountRef} className="w-full h-full flex-shrink-0 flex flex-col items-center justify-center"></div>;
 };
