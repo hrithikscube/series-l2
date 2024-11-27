@@ -4,10 +4,8 @@ import React, { useEffect, useState } from 'react'
 import gsap from 'gsap/dist/gsap'
 import ScrollTrigger from 'gsap/dist/ScrollTrigger'
 import ScrollToPlugin from 'gsap/dist/ScrollToPlugin'
-
 import BottlePath from './Assets/bottle.glb'
 import GLBViewer from './Components/GLBViewer'
-import Marquee from 'react-fast-marquee'
 
 const App = () => {
 
@@ -34,7 +32,9 @@ const App = () => {
             opacity: 1,
             onComplete: () => {
               gsap.to('.initial-video-section', {
-                translateY: '-100%'
+                translateY: '-100%',
+                duration: 2,
+                ease: 'power1.inOut'
               })
             }
           })
@@ -84,7 +84,7 @@ const App = () => {
   })
 
   return (
-    <div className='flex flex-col w-full relative main-container'>
+    <div className='flex flex-col w-full relative main-container overflow-x-hidden'>
 
       <div className='w-full h-screen bg-black flex flex-col items-center justify-center z-10 initial-video-section absolute top-0 left-0'>
 
@@ -107,10 +107,14 @@ const App = () => {
         </div>
       </div>
 
-      <div className='hero-section flex flex-col items-center justify-center w-full h-screen p-10'>
+      <div className='hero-section flex flex-col items-center justify-center w-full h-screen p-10 relative'>
 
         <div className='w-full h-full'>
           <GLBViewer noControls={true} x={params.x} y={params.y} params={params.x} modelPath={BottlePath} modelColor={"null"} />
+        </div>
+
+        <div className='flex flex-col items-center justify-center w-full h-full flex-shrink-0 absolute top-0 left-0'>
+          <h1 className='lg:text-[8rem] font-medium'>Series L2</h1>
         </div>
 
       </div>
