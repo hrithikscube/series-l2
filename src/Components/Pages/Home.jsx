@@ -4,9 +4,6 @@ import gsap from 'gsap/dist/gsap';
 // import GasBottles from '../../Assets/gas_bottles_set.glb';
 // import BeerBottle from '../../Assets/beer_bottle.glb';
 import WaterBottle from '../../Assets/water_bottle.glb';
-import MotorCycle from '../../Assets/motorcycle.glb';
-
-
 
 import React, { useEffect, useState } from 'react';
 import ScrollTrigger from 'gsap/dist/ScrollTrigger';
