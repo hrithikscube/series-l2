@@ -1,11 +1,10 @@
 /* eslint-disable */
-
-import React, { useEffect, useState } from 'react'
-import gsap from 'gsap/dist/gsap'
-import ScrollTrigger from 'gsap/dist/ScrollTrigger'
-import ScrollToPlugin from 'gsap/dist/ScrollToPlugin'
-import BottlePath from './Assets/bottle.glb'
-import GLBViewer from './Components/GLBViewer'
+import gsap from 'gsap/dist/gsap';
+import BottlePath from './Assets/bottle.glb';
+import GLBViewer from './Components/GLBViewer';
+import React, { useEffect, useState } from 'react';
+import ScrollTrigger from 'gsap/dist/ScrollTrigger';
+import ScrollToPlugin from 'gsap/dist/ScrollToPlugin';
 
 const App = () => {
 
@@ -15,8 +14,12 @@ const App = () => {
 
     let ctx1 = gsap.context(() => {
       gsap.set('.intro-text', {
-        opacity: 0,
+        // opacity: 0,
         translateX: '100%',
+      })
+
+      gsap.set('.intro-text-container', {
+        backgroundColor: '#000'
       })
 
       gsap.to('.intro-text', {
@@ -24,102 +27,77 @@ const App = () => {
         duration: 3,
         ease: 'none',
         opacity: 1,
+        // onComplete: () => {
+        //   gsap.to('.intro-text', {
+        //     translateX: '-110%',
+        //     duration: 3,
+        //     ease: 'none',
+        //     opacity: 1,
+        //   })
+        // }
+
         onComplete: () => {
-          gsap.to('.intro-text', {
-            translateX: '-110%',
-            duration: 3,
-            ease: 'none',
-            opacity: 1,
-            onComplete: () => {
-              gsap.to('.initial-video-section', {
-                translateY: '-100%',
-                duration: 2,
-                ease: 'power1.inOut'
-              })
-            }
+          setProperty({
+            ...property,
+            triggerAnimation: true,
+            parallaxControl: true,
+          })
+          gsap.to('.intro-text-container', {
+            opacity: 0,
           })
         }
       })
 
-      // setTimeout(() => {
-      //   gsap.to('.initial-video-section', {
-      //     translateY: '-100%',
-      //     duration: 2,
-      //     ease: 'none'
-      //   })
-      // }, 4000)
-
-    })
-
-
-    let ctx = gsap.context(() => {
-      gsap.to('.hero-section', {
-        scrollTrigger: {
-          trigger: '.hero-section',
-          pin: true,
-          start: 'top top',
-          endTrigger: '.section-3',
-          end: 'bottom bottom',
-          // markers: true,
-          pinSpacing: false,
-          scrub: true,
-          onUpdate: (self) => {
-            console.log(self.progress, 'val')
-          }
-        }
-      })
     })
 
     return () => {
       ctx1.revert()
-      ctx.revert()
     }
 
   }, [])
 
-  const [params, setParams] = useState({
-    x: 0.0,
-    y: 0.0,
-    z: 0.0
+  const [property, setProperty] = useState({
+    triggerAnimation: false,
+    parallaxControl: false
   })
+
 
   return (
     <div className='flex flex-col w-full relative main-container overflow-x-hidden'>
 
-      <div className='w-full h-screen bg-black flex flex-col items-center justify-center z-10 initial-video-section absolute top-0 left-0'>
-
-        <div className='w-full relative text-center flex items-center justify-center'>
-
-          <div
-            className="w-full h-full absolute top-0 left-0"
-            style={{
-              background: `radial-gradient(circle, #808080 20%, transparent 21%) 0 0,
-                 radial-gradient(circle, #808080 20%, transparent 21%) 5px 5px`,
-              backgroundSize: '10px 10px',
-            }}
-          >
-          </div>
-
-          {/* <Marquee speed={120} className='w-full h-full'> */}
-          <h1 className='intro-text text-[9rem] z-8 text-[#f2f2f2] font-thin tracking-wider text-glow'>LWL8 - Series L2</h1>
-          {/* </Marquee> */}
-
-        </div>
-      </div>
-
-      <div className='hero-section flex flex-col items-center justify-center w-full h-screen p-10 relative'>
+      <div className='hero-section flex flex-col items-center justify-center w-full h-screen relative'>
 
         <div className='w-full h-full'>
-          <GLBViewer noControls={true} x={params.x} y={params.y} params={params.x} modelPath={BottlePath} modelColor={"null"} />
+          <GLBViewer
+            noControls={true}
+            modelColor={"#f2f2f2"}
+            modelPath={BottlePath}
+            parallaxControl={property.parallaxControl}
+            triggerAnimation={property.triggerAnimation}
+          />
         </div>
 
-        <div className='flex flex-col items-center justify-center w-full h-full flex-shrink-0 absolute top-0 left-0'>
-          <h1 className='lg:text-[8rem] font-medium'>Series L2</h1>
+        <div className='flex flex-col items-center justify-center w-full h-full flex-shrink-0 absolute top-0 left-0 intro-text-container'>
+          <div className='w-full relative text-center flex items-center justify-center'>
+
+            <div
+              className="w-full h-full absolute top-0 left-0"
+              style={{
+                background: `radial-gradient(circle, #808080 20%, transparent 21%) 0 0,
+       radial-gradient(circle, #808080 20%, transparent 21%) 5px 5px`,
+                backgroundSize: '10px 10px',
+              }}
+            >
+            </div>
+
+            <h1 className='intro-text text-[9rem] z-8 text-white font-thin tracking-wider text-glow'>LWL8 - SERIES L2</h1>
+
+          </div>
         </div>
 
       </div>
 
-      <div className='flex flex-col w-full h-screen items-center justify-center bg-blue-200 lg:text-base text-sm'>
+      <div className='section-2 flex flex-col w-full h-screen items-center justify-center bg-blue-200 lg:text-base text-sm'>
         Section 2
       </div>
 

@@ -1,9 +1,6 @@
-/* eslint-disable */
-
-// // src/components/GLBViewer.js
 // import './GLBViewer.css';
 // import * as THREE from 'three';
-// import React, { useEffect, useRef, useState } from 'react';
+// import React, { useEffect, useRef } from 'react';
 // import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 // import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
@@ -11,9 +8,8 @@
 //     const mountRef = useRef(null);
 
 //     useEffect(() => {
-//         const scene = new THREE.Scene();
-//         // scene.background = new THREE.Color(); // Set background color
-//         scene.background = null
+//         let scene = new THREE.Scene();
+//         scene.background = null;
 
 //         const camera = new THREE.PerspectiveCamera(
 //             60,
@@ -30,14 +26,13 @@
 //         const controls = new OrbitControls(camera, renderer.domElement);
 //         controls.target.set(x, y, z);
 //         if (noControls) {
-//             controls.enableZoom = false; // Disable zoom
-//             controls.enableRotate = false; // Disable rotation
+//             controls.enableZoom = false;
+//             controls.enableRotate = false;
 //             controls.enablePan = false;
 //         }
 //         controls.update();
 
-//         // Add lighting
-//         const ambientLight = new THREE.AmbientLight(0xffffff, 5); // Add ambient light
+//         const ambientLight = new THREE.AmbientLight(0xffffff, 5);
 //         scene.add(ambientLight);
 
 //         const light = new THREE.HemisphereLight(0xffffff, 0x444444);
@@ -50,10 +45,9 @@
 //             modelPath,
 //             (gltf) => {
 //                 model = gltf.scene;
-//                 model.scale.set(1, 1, 1); // Adjust the scale if needed
+//                 model.scale.set(1, 1, 1);
 //                 scene.add(model);
 
-//                 // Center and scale the model
 //                 const box = new THREE.Box3().setFromObject(model);
 //                 const size = box.getSize(new THREE.Vector3()).length();
 //                 const center = box.getCenter(new THREE.Vector3());
@@ -75,10 +69,8 @@
 //                 controls.maxDistance = size * 10;
 //                 controls.update();
 
-//                 // Change the model color
 //                 model.traverse((child) => {
 //                     if (child.isMesh) {
-//                         // Create a new material with the desired color
 //                         const newMaterial = new THREE.MeshStandardMaterial({
 //                             color: new THREE.Color(modelColor),
 //                             roughness: 0.5,
@@ -87,6 +79,23 @@
 //                         child.material = newMaterial;
 //                     }
 //                 });
+
+//                 // parallaxControl effect
+//                 const onMouseMove = (event) => {
+//                     const mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+//                     const mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+
+//                     scene.rotation.y = mouseX * 0.5; // Adjust rotation sensitivity
+//                     scene.rotation.x = mouseY * 0.5;
+
+//                 };
+
+//                 window.addEventListener('mousemove', onMouseMove);
+
+//                 // Cleanup on component unmount
+//                 return () => {
+//                     window.removeEventListener('mousemove', onMouseMove);
+//                 };
 //             },
 //             undefined,
 //             (error) => {
@@ -104,12 +113,15 @@
 //         return () => {
 //             mountRef.current.removeChild(renderer.domElement);
 //         };
-//     }, [modelPath, modelColor]);
+//     }, [modelPath, modelColor, x, y, z, noControls]);
+
+
 
 //     return <div ref={mountRef} className="w-full h-full flex-shrink-0 flex flex-col items-center justify-center"></div>;
 // };
 
 // export default GLBViewer;
+
 
 import './GLBViewer.css';
 import * as THREE from 'three';
@@ -117,11 +129,14 @@ import React, { useEffect, useRef } from 'react';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
-const GLBViewer = ({ modelPath, modelColor, noControls, x, y, z }) => {
+const GLBViewer = ({ modelPath, modelColor, noControls, triggerAnimation, parallaxControl }) => {
     const mountRef = useRef(null);
+    const cameraRef = useRef(null);
+    const rendererRef = useRef(null);
+    const controlsRef = useRef(null);
 
     useEffect(() => {
-        let scene = new THREE.Scene();
+        const scene = new THREE.Scene();
         scene.background = null;
 
         const camera = new THREE.PerspectiveCamera(
@@ -130,20 +145,23 @@ const GLBViewer = ({ modelPath, modelColor, noControls, x, y, z }) => {
             0.1,
             1000
         );
-        camera.position.z = 5;
+        camera.position.z = 6;
+        cameraRef.current = camera;
 
         const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
         renderer.setSize(mountRef.current.clientWidth, mountRef.current.clientHeight);
         mountRef.current.appendChild(renderer.domElement);
+        rendererRef.current = renderer;
 
         const controls = new OrbitControls(camera, renderer.domElement);
-        controls.target.set(x, y, z);
+        // controls.target.set(x, y, z);
         if (noControls) {
             controls.enableZoom = false;
             controls.enableRotate = false;
             controls.enablePan = false;
         }
         controls.update();
+        controlsRef.current = controls;
 
         const ambientLight = new THREE.AmbientLight(0xffffff, 5);
         scene.add(ambientLight);
@@ -193,22 +211,21 @@ const GLBViewer = ({ modelPath, modelColor, noControls, x, y, z }) => {
                     }
                 });
 
-                // Parallax effect
                 const onMouseMove = (event) => {
                     const mouseX = (event.clientX / window.innerWidth) * 2 - 1;
                     const mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
 
-                    scene.rotation.y = mouseX * 0.5; // Adjust rotation sensitivity
+                    scene.rotation.y = mouseX * 0.5;
                     scene.rotation.x = mouseY * 0.5;
-
                 };
 
-                window.addEventListener('mousemove', onMouseMove);
+                if (parallaxControl) {
+                    window.addEventListener('mousemove', onMouseMove);
 
-                // Cleanup on component unmount
-                return () => {
-                    window.removeEventListener('mousemove', onMouseMove);
-                };
+                    return () => {
+                        window.removeEventListener('mousemove', onMouseMove);
+                    };
+                }
             },
             undefined,
             (error) => {
@@ -224,9 +241,36 @@ const GLBViewer = ({ modelPath, modelColor, noControls, x, y, z }) => {
         animate();
 
         return () => {
+            renderer.dispose();
             mountRef.current.removeChild(renderer.domElement);
         };
-    }, [modelPath, modelColor, x, y, z, noControls]);
+    }, [modelPath, modelColor, noControls, parallaxControl, triggerAnimation]);
+
+    useEffect(() => {
+        if (!triggerAnimation || !cameraRef.current) return;
+
+        const camera = cameraRef.current;
+        const startZoom = 7; // Start zoom level
+        const endZoom = 1.2; // End zoom level
+        const duration = 2500; // 2 seconds
+        let startTime = null;
+
+        const zoomAnimation = (time) => {
+            if (!startTime) startTime = time;
+            const elapsed = time - startTime;
+            const t = Math.min(elapsed / duration, 1); // Normalize time to [0, 1]
+
+            camera.zoom = THREE.MathUtils.lerp(startZoom, endZoom, t);
+            camera.updateProjectionMatrix();
+
+            if (t < 1) {
+                requestAnimationFrame(zoomAnimation);
+            }
+        };
+
+        requestAnimationFrame(zoomAnimation);
+        // eslint-disable-next-line
+    }, [triggerAnimation]);
 
     return <div ref={mountRef} className="w-full h-full flex-shrink-0 flex flex-col items-center justify-center"></div>;
 };
