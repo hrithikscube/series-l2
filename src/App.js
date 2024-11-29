@@ -1,10 +1,14 @@
 /* eslint-disable */
 import gsap from 'gsap/dist/gsap';
 import BottlePath from './Assets/bottle.glb';
+import GasBottles from './Assets/gas_bottles_set.glb';
+import BeerBottle from './Assets/beer_bottle.glb';
+
 import GLBViewer from './Components/GLBViewer';
 import React, { useEffect, useState } from 'react';
 import ScrollTrigger from 'gsap/dist/ScrollTrigger';
 import ScrollToPlugin from 'gsap/dist/ScrollToPlugin';
+import GLTFViewer from './Components/GLTFViewer';
 
 const App = () => {
 
@@ -68,13 +72,16 @@ const App = () => {
       <div className='hero-section flex flex-col items-center justify-center w-full h-screen relative'>
 
         <div className='w-full h-full'>
-          <GLBViewer
+          {/* <GLBViewer
             noControls={true}
             modelColor={"#f2f2f2"}
             modelPath={BottlePath}
             parallaxControl={property.parallaxControl}
             triggerAnimation={property.triggerAnimation}
-          />
+          /> */}
+
+          <GLTFViewer triggerAnimation={property.triggerAnimation} modelPath={GasBottles} />
+
         </div>
 
         <div className='flex flex-col items-center justify-center w-full h-full flex-shrink-0 absolute top-0 left-0 intro-text-container'>
@@ -104,6 +111,14 @@ const App = () => {
       <div className='section-3 flex flex-col w-full h-screen items-center justify-center bg-red-200 lg:text-base text-sm'>
         Section 3
       </div>
+
+      {/* <div className='flex flex-col w-full h-screen bg-blue-200'>
+
+        <div className='w-6/12 mx-auto h-full'>
+          <GLTFViewer triggerAnimation={true} modelPath={GasBottles} />
+        </div>
+
+      </div> */}
 
 
 

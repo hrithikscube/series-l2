@@ -260,7 +260,7 @@ const GLBViewer = ({ modelPath, modelColor, noControls, triggerAnimation, parall
         const zoomAnimation = (time) => {
             if (!startTime) startTime = time;
             const elapsed = time - startTime;
-            const t = Math.min(elapsed / duration, 1); // Normalize time to [0, 1]
+            let t = Math.min(elapsed / duration, 1); // Normalize time to [0, 1]
 
             t = t * t; // Apply ease-in effect (quadratic easing)
 
