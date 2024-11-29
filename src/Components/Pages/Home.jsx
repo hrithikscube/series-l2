@@ -1,13 +1,14 @@
 /* eslint-disable */
 import gsap from 'gsap/dist/gsap';
-// import BottlePath from '../../Assets/bottle.glb';
-// import GasBottles from '../../Assets/gas_bottles_set.glb';
+import BottlePath from '../../Assets/bottle.glb';
+import GasBottles from '../../Assets/gas_bottles_set.glb';
 // import BeerBottle from '../../Assets/beer_bottle.glb';
 import WaterBottle from '../../Assets/water_bottle.glb';
 
 import React, { useEffect, useState } from 'react';
 import ScrollTrigger from 'gsap/dist/ScrollTrigger';
 import ScrollToPlugin from 'gsap/dist/ScrollToPlugin';
+import GLBViewer from '../GLBViewer';
 import GLTFViewer from '../GLTFViewer';
 
 const Home = () => {
@@ -96,15 +97,15 @@ const Home = () => {
             <div className='hero-section flex flex-col items-center justify-center w-full h-screen relative z-10'>
 
                 <div className='w-full h-full'>
-                    {/* <GLBViewer
-            noControls={true}
-            modelColor={"#f2f2f2"}
-            modelPath={BottlePath}
-            parallaxControl={property.parallaxControl}
-            triggerAnimation={property.triggerAnimation}
-          /> */}
+                    <GLBViewer
+                        noControls={true}
+                        modelColor={"#f2f2f2"}
+                        modelPath={BottlePath}
+                        parallaxControl={property.parallaxControl}
+                        triggerAnimation={property.triggerAnimation}
+                    />
 
-                    <GLTFViewer rotation={rotation} triggerAnimation={property.triggerAnimation} modelPath={WaterBottle} />
+                    {/* <GLTFViewer rotation={rotation} triggerAnimation={property.triggerAnimation} modelPath={GasBottles} /> */}
 
                 </div>
 
