@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 // import './GLBViewer.css';
 // import * as THREE from 'three';
 // import React, { useEffect, useRef } from 'react';
