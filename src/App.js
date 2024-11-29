@@ -3,6 +3,8 @@ import gsap from 'gsap/dist/gsap';
 import BottlePath from './Assets/bottle.glb';
 import GasBottles from './Assets/gas_bottles_set.glb';
 import BeerBottle from './Assets/beer_bottle.glb';
+import WaterBottle from './Assets/water_bottle.glb';
+
 
 import GLBViewer from './Components/GLBViewer';
 import React, { useEffect, useState } from 'react';
@@ -80,7 +82,7 @@ const App = () => {
             triggerAnimation={property.triggerAnimation}
           /> */}
 
-          <GLTFViewer triggerAnimation={property.triggerAnimation} modelPath={GasBottles} />
+          <GLTFViewer triggerAnimation={property.triggerAnimation} modelPath={WaterBottle} />
 
         </div>
 

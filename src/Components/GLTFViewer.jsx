@@ -120,7 +120,7 @@ const GLTFViewer = ({ modelPath, noControls, triggerAnimation }) => {
 
         const camera = cameraRef.current;
         const startZoom = 7; // Start zoom level
-        const endZoom = 1.2; // End zoom level
+        const endZoom = 0.6; // End zoom level
         const duration = 2500; // 2 seconds
         let startTime = null;
 
@@ -143,7 +143,7 @@ const GLTFViewer = ({ modelPath, noControls, triggerAnimation }) => {
         // eslint-disable-next-line
     }, [triggerAnimation]);
 
-    return <div ref={mountRef} style={{ width: '100%', height: '100%' }} />;
+    return <div ref={mountRef} style={{ width: '100%', height: '100%' }} className='w-full h-full flex-shrink-0' />;
 };
 
 export default GLTFViewer;
