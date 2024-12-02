@@ -9,6 +9,13 @@ import ScrollToPlugin from 'gsap/dist/ScrollToPlugin';
 import WaterBottle from '../../Assets/water_bottle.glb';
 
 const SeriesL2 = () => {
+
+    useEffect(() => {
+
+        window.scrollTo(0, 0)
+
+    }, [])
+
     const [rotation, setRotation] = useState({
         x: 0,
         y: 0,
@@ -149,9 +156,16 @@ const SeriesL2 = () => {
             </div>
 
 
-            <div className='w-full flex flex-col min-h-screen text-center relative bg-slate-100 py-10 active-lifestyle-section'>
+            <div className='w-full flex flex-col min-h-screen text-center relative py-10 active-lifestyle-section'>
 
-                <div className='flex flex-col'>
+                <div className='w-full h-full absolute top-0 left-0 z-10'>
+
+                    <img src="hero-background.jpeg" alt="hero_background" className='w-full h-full object-cover opacity-30' />
+
+                </div>
+
+
+                <div className='flex flex-col z-20 relative'>
                     <div className='flex flex-col items-center justify-start lg:p-10 p-6'>
                         <p className='section-sub-text'>Active Lifestyle Companion</p>
 

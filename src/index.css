@@ -26,5 +26,5 @@
 }
 
 .section-title {
-    @apply font-bold lg:text-5xl text-2xl;
+    @apply font-bold lg:text-5xl/snug text-2xl;
 }
