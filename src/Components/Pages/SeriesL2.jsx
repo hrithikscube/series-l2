@@ -87,9 +87,9 @@ const SeriesL2 = () => {
                 scrollTrigger: {
                     trigger: '.active-lifestyle-section',
                     start: '40% top',
-                    end: '150% bottom',
+                    end: '120% bottom',
                     // markers: true,
-                    scrub: 4
+                    scrub: 2
                 }
             })
 
