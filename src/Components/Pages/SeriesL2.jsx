@@ -131,7 +131,7 @@ const SeriesL2 = () => {
         <div className='flex flex-col w-full overflow-x-hidden'>
 
 
-            <div className='w-full h-screen flex flex-col items-center justify-center lg:p-10 p-6 bg-[#121212]'>
+            <div className='w-full h-screen flex flex-col items-center justify-center lg:p-10 p-6 bg-black'>
 
                 <div className='w-full h-44 relative overflow-x-hidden'>
                     <div>
@@ -155,7 +155,7 @@ const SeriesL2 = () => {
                     <div className='flex flex-col items-center justify-start lg:p-10 p-6'>
                         <p className='section-sub-text'>Active Lifestyle Companion</p>
 
-                        <h2 className='font-bold text-[#121212]/80 lg:text-8xl text-7xl'>Series L2</h2>
+                        <h2 className='font-bold text-black/80 lg:text-8xl text-7xl'>Series L2</h2>
                     </div>
 
                     <div className='w-5/12 mx-auto h-[550px] lifestyle-contents'>
@@ -200,8 +200,8 @@ const SeriesL2 = () => {
 
                         <div className='flex flex-col gap-2 w-8/12'>
 
-                            <h3 className='lg:text-2xl md:text-lg text-base text-[#121212] font-semibold'>Stay on track with your hydration goals effortlessly.</h3>
-                            <p className='lg:text-2xl md:text-lg text-base text-[#121212]'>The Series L2 bottle sends gentle vibration reminders to keep you drinking throughout the day.</p>
+                            <h3 className='lg:text-2xl md:text-lg text-base text-black font-semibold'>Stay on track with your hydration goals effortlessly.</h3>
+                            <p className='lg:text-2xl md:text-lg text-base text-black'>The Series L2 bottle sends gentle vibration reminders to keep you drinking throughout the day.</p>
 
                         </div>
 
@@ -212,7 +212,7 @@ const SeriesL2 = () => {
 
                         <div className='flex flex-col gap-2 w-8/12'>
 
-                            <h3 className='lg:text-2xl md:text-lg text-base text-[#121212] font-semibold'>Built for comfort and durability, the Series L2 is made from Tritan™, <span className='lg:text-2xl md:text-lg text-base text-[#121212] font-[400]'> offering a sleek, ergonomic design that feels natural to carry wherever you go.</span></h3>
+                            <h3 className='lg:text-2xl md:text-lg text-base text-black font-semibold'>Built for comfort and durability, the Series L2 is made from Tritan™, <span className='lg:text-2xl md:text-lg text-base text-black font-[400]'> offering a sleek, ergonomic design that feels natural to carry wherever you go.</span></h3>
 
                         </div>
                     </div>
@@ -221,8 +221,8 @@ const SeriesL2 = () => {
 
                         <div className='flex flex-col gap-2 w-8/12'>
 
-                            <h3 className='lg:text-2xl md:text-lg text-base text-[#121212] font-semibold'>Get essential information at a glance. </h3>
-                            <p className='lg:text-2xl md:text-lg text-base text-[#121212]'>The dot matrix display shows the time, your daily water intake percentage, and fun animations, making hydration more engaging.</p>
+                            <h3 className='lg:text-2xl md:text-lg text-base text-black font-semibold'>Get essential information at a glance. </h3>
+                            <p className='lg:text-2xl md:text-lg text-base text-black'>The dot matrix display shows the time, your daily water intake percentage, and fun animations, making hydration more engaging.</p>
 
                         </div>
                     </div>
@@ -230,8 +230,8 @@ const SeriesL2 = () => {
                     <div className='flex flex-col w-full h-full flex-shrink-0 items-center justify-center bottle-information-4 lg:pr-10 lg:pl-0 pr-6 pl-6'>
                         <div className='flex flex-col gap-2 w-8/12'>
 
-                            <h3 className='lg:text-2xl md:text-lg text-base text-[#121212] font-semibold'>Personalised Animations and Graffiti.</h3>
-                            <p className='lg:text-2xl md:text-lg text-base text-[#121212]'>Make your bottle your own with animations and graffiti displayed on the screen.</p>
+                            <h3 className='lg:text-2xl md:text-lg text-base text-black font-semibold'>Personalised Animations and Graffiti.</h3>
+                            <p className='lg:text-2xl md:text-lg text-base text-black'>Make your bottle your own with animations and graffiti displayed on the screen.</p>
 
                         </div>
                     </div>
@@ -248,7 +248,7 @@ const SeriesL2 = () => {
 
             {/* pin spacer do not delete */}
 
-            <div className='w-full flex flex-row text-center bg-[#121212] text-white h-screen flex-shrink-0 py-10 lwl8-app-section'>
+            <div className='w-full flex flex-row text-center bg-black text-white h-screen flex-shrink-0 py-10 lwl8-app-section'>
 
                 <div className='flex flex-col lg:p-10 p-6 items-center justify-center lg:w-6/12'>
 
@@ -310,7 +310,7 @@ const SeriesL2 = () => {
                 </div>
             </div>
 
-            <div className='w-full flex flex-col lg:p-10 p-6 text-center h-screen items-center justify-center bg-[#121212] text-white'>
+            <div className='w-full flex flex-col lg:p-10 p-6 text-center h-screen items-center justify-center bg-black text-white'>
 
                 <div className='flex flex-col text-center lg:gap-6 gap-4'>
 
