@@ -80,11 +80,17 @@ const SeriesL2 = () => {
             </div>
 
 
-            <div className='w-full flex flex-col h-screen lg:p-10 p-6 text-center'>
+            <div className='w-full flex flex-col min-h-screen lg:p-10 p-6 text-center relative'>
 
-                <p className='section-sub-text'>Active Lifestyle Companion</p>
+                <div className='flex flex-col items-center justify-start lg:p-10 p-6'>
+                    <p className='section-sub-text'>Active Lifestyle Companion</p>
 
-                <h2 className='font-bold text-[#121212]/80 lg:text-9xl text-7xl'>Series L2</h2>
+                    <h2 className='font-bold text-[#121212]/80 lg:text-9xl text-7xl'>Series L2</h2>
+                </div>
+
+                <div className='w-5/12 mx-auto h-[550px]'>
+                    <GLTFViewer modelPath={WaterBottle} />
+                </div>
 
             </div>
 
@@ -102,9 +108,11 @@ const SeriesL2 = () => {
 
             <div className='flex flex-row w-full h-screen intro-section'>
 
-                <div className="lg:w-7/12 h-full pin-this-bottle">
+                <div className="lg:w-6/12 h-full flex flex-col items-center justify-center pin-this-bottle lg:p-10 p-6">
 
-                    <GLTFViewer modelPath={WaterBottle} />
+                    <div className='w-full h-[90%]'>
+                        <GLTFViewer modelPath={WaterBottle} />
+                    </div>
 
                 </div>
 
@@ -113,7 +121,7 @@ const SeriesL2 = () => {
 
             <div className='flex flex-row w-full h-screen items-end justify-end -mt-[100vh]'>
 
-                <div className="lg:w-5/12 h-full flex flex-col flex-shrink-0">
+                <div className="lg:w-6/12 h-full flex flex-col flex-shrink-0">
 
 
                     <div className='flex flex-col w-full h-full flex-shrink-0 items-center justify-center bottle-information-1 lg:p-10 p-6'>
