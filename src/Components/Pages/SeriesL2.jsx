@@ -245,7 +245,7 @@ const SeriesL2 = () => {
 
             {/* pin spacer do not delete */}
 
-            <div className='w-full flex flex-row text-center bg-[#121212] text-white h-screen flex-shrink-0 py-10 lwl8-app-section'>
+            <div className='w-full flex flex-row text-center bg-gradient-to-r  from-slate-900 to-[#121212] text-white h-screen flex-shrink-0 py-10 lwl8-app-section'>
 
                 <div className='flex flex-col lg:p-10 p-6 items-center justify-center lg:w-6/12'>
 
