@@ -20,3 +20,11 @@
 .text-glow {
     text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #fff;
 }
+
+.section-sub-text {
+    @apply lg:text-lg text-sm font-semibold;
+}
+
+.section-title {
+    @apply font-bold lg:text-4xl text-2xl;
+}
