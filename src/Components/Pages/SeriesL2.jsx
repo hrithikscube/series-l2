@@ -76,14 +76,46 @@ const SeriesL2 = () => {
                 ease: 'power1.inOut',
                 scrollTrigger: {
                     trigger: '.active-lifestyle-section',
-                    start: '30% top',
-                    end: 'bottom bottom',
+                    start: '40% top',
+                    end: '150% bottom',
                     // markers: true,
                     scrub: 4
                 }
             })
 
 
+        })
+
+        gsap.set('.lwl8-app', {
+            opacity: 0,
+            y: '100%'
+        })
+
+        gsap.to('.lwl8-app', {
+            opacity: 100,
+            duration: 4,
+            y: 0,
+            ease: 'power1.inOut',
+            scrollTrigger: {
+                trigger: '.lwl8-app-section',
+                start: '-50% top',
+                end: 'center bottom',
+                // markers: true,
+                scrub: 2
+            }
+        })
+
+        gsap.to('.app-text', {
+            opacity: 100,
+            ease: 'none',
+            stagger: 0.5,
+            scrollTrigger: {
+                trigger: '.lwl8-app-section',
+                start: '-50% top',
+                end: 'bottom bottom',
+                // markers: true,
+                scrub: 1
+            }
         })
 
         return () => ctx.revert()
@@ -163,7 +195,7 @@ const SeriesL2 = () => {
                     <div className='flex flex-col w-full h-full flex-shrink-0 items-center justify-center bottle-information-1 lg:pr-10 lg:pl-0 pr-6 pl-6'>
 
 
-                        <div className='flex flex-col gap-2 w-10/12'>
+                        <div className='flex flex-col gap-2 w-8/12'>
 
                             <h3 className='lg:text-2xl md:text-lg text-base text-[#121212] font-semibold'>Stay on track with your hydration goals effortlessly.</h3>
                             <p className='lg:text-2xl md:text-lg text-base text-[#121212]'>The Series L2 bottle sends gentle vibration reminders to keep you drinking throughout the day.</p>
@@ -175,17 +207,16 @@ const SeriesL2 = () => {
 
                     <div className='flex flex-col w-full h-full flex-shrink-0 items-center justify-center bottle-information-2 lg:pr-10 lg:pl-0 pr-6 pl-6'>
 
-                        <div className='flex flex-col gap-2 w-10/12'>
+                        <div className='flex flex-col gap-2 w-8/12'>
 
-                            <h3 className='lg:text-2xl md:text-lg text-base text-[#121212] font-semibold'>Built for comfort and durability, the Series L2 is made from Tritan™,</h3>
-                            <p className='lg:text-2xl md:text-lg text-base text-[#121212]'> offering a sleek, ergonomic design that feels natural to carry wherever you go.</p>
+                            <h3 className='lg:text-2xl md:text-lg text-base text-[#121212] font-semibold'>Built for comfort and durability, the Series L2 is made from Tritan™, <span className='lg:text-2xl md:text-lg text-base text-[#121212] font-[400]'> offering a sleek, ergonomic design that feels natural to carry wherever you go.</span></h3>
 
                         </div>
                     </div>
 
                     <div className='flex flex-col w-full h-full flex-shrink-0 items-center justify-center bottle-information-3 lg:pr-10 lg:pl-0 pr-6 pl-6'>
 
-                        <div className='flex flex-col gap-2 w-10/12'>
+                        <div className='flex flex-col gap-2 w-8/12'>
 
                             <h3 className='lg:text-2xl md:text-lg text-base text-[#121212] font-semibold'>Get essential information at a glance. </h3>
                             <p className='lg:text-2xl md:text-lg text-base text-[#121212]'>The dot matrix display shows the time, your daily water intake percentage, and fun animations, making hydration more engaging.</p>
@@ -194,7 +225,7 @@ const SeriesL2 = () => {
                     </div>
 
                     <div className='flex flex-col w-full h-full flex-shrink-0 items-center justify-center bottle-information-4 lg:pr-10 lg:pl-0 pr-6 pl-6'>
-                        <div className='flex flex-col gap-2 w-10/12'>
+                        <div className='flex flex-col gap-2 w-8/12'>
 
                             <h3 className='lg:text-2xl md:text-lg text-base text-[#121212] font-semibold'>Personalised Animations and Graffiti.</h3>
                             <p className='lg:text-2xl md:text-lg text-base text-[#121212]'>Make your bottle your own with animations and graffiti displayed on the screen.</p>
@@ -208,25 +239,38 @@ const SeriesL2 = () => {
             </div>
 
             {/* pin spacer do not delete */}
-            <div className='w-full h-screen' />
-            <div className='w-full h-screen' />
-            <div className='w-full h-screen' />
+            <div className='w-full h-screen flex-shrink-0' />
+            <div className='w-full h-screen flex-shrink-0' />
+            <div className='w-full h-screen flex-shrink-0' />
 
             {/* pin spacer do not delete */}
 
-            <div className='w-full flex flex-row text-center bg-[#121212] text-white h-screen py-10'>
+            <div className='w-full flex flex-row text-center bg-[#121212] text-white h-screen flex-shrink-0 py-10 lwl8-app-section'>
 
                 <div className='flex flex-col lg:p-10 p-6 items-center justify-center lg:w-6/12'>
 
-                    <img src="/mobile_app.png" alt="lwl8-app" className='w-full h-full object-contain' />
+                    <img src="/mobile_app.png" alt="lwl8-app" className='w-full h-full object-contain lwl8-app' />
 
                 </div>
 
                 <div className='flex flex-col text-center lg:gap-6 gap-4  lg:p-10 p-6 items-center justify-center lg:w-6/12'>
                     <div className='flex flex-col gap-4 w-10/12'>
 
-                        <h3 className='lg:text-2xl md:text-lg text-base text-white text-start font-medium'>Connect to the LWL8 app for a personalized hydration experience.</h3>
-                        <p className='lg:text-2xl md:text-lg text-base text-white text-start font-[400]'> Track, monitor, and achieve your goals with smart insights synced directly to your device.</p>
+                        <div className='flex flex-wrap gap-1'>
+                            {
+                                "Connect to the LWL8 app for a personalized hydration experience.".split(' ').map(item => (
+                                    <h3 className='lg:text-2xl md:text-lg text-base text-white text-start font-medium opacity-10 app-text'>{item}</h3>
+                                ))
+                            }
+                        </div>
+
+                        <div className='flex flex-wrap gap-1'>
+                            {
+                                "Track, monitor, and achieve your goals with smart insights synced directly to your device.".split(' ').map(item => (
+                                    <h3 className='lg:text-2xl md:text-lg text-base text-white text-start opacity-10 app-text'>{item}</h3>
+                                ))
+                            }
+                        </div>
 
                     </div>
                 </div>
@@ -253,7 +297,7 @@ const SeriesL2 = () => {
                                     <img src={`https://picsum.photos/id/${50 + index}/1200/800`} alt="placeholder-image" className='w-full h-full object-cover ' />
 
                                     <div className='w-full min-h-20 bg-black/40 flex flex-col items-center justify-end lg:p-10 p-4 absolute left-0 bottom-0'>
-                                        <p className='lg:text-base text-sm lg:leading-normal leading-loose text-white text-center lg:w-5/12 mx-auto'>The Series L1 supports your fitness goals, reminding you to refuel after every rep or run.</p>
+                                        <p className='lg:text-lg md:text-base text-sm lg:leading-normal leading-loose text-white text-center lg:w-5/12 mx-auto'>The Series L1 supports your fitness goals, reminding you to refuel after every rep or run.</p>
                                     </div>
                                 </div>
                             </div>
@@ -263,14 +307,14 @@ const SeriesL2 = () => {
                 </div>
             </div>
 
-
             <div className='w-full flex flex-col lg:p-10 p-6 text-center h-screen items-center justify-center bg-black text-white'>
 
                 <div className='flex flex-col text-center lg:gap-6 gap-4'>
+
                     <h2 className='lg:text-5xl/snug font-bold lg:w-6/12 mx-auto'>Sync, Connect and Drink Water Smarter with LWL8</h2>
                     <p className='section-sub-text lg:w-5/12 mx-auto'>Step-by-step guide to syncing, utilising lights, and Bluetooth functionality.</p>
 
-                    <button className='lg:text-base text-sm font-medium hover:underline'>See how it works</button>
+                    <button className='lg:text-lg md:text-base text-sm font-medium hover:underline'>See how it works</button>
                 </div>
             </div>
 
