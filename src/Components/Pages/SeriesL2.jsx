@@ -1,11 +1,20 @@
 import gsap from 'gsap/dist/gsap';
 import GLTFViewer from '../GLTFViewer';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import ScrollTrigger from 'gsap/dist/ScrollTrigger';
 import ScrollToPlugin from 'gsap/dist/ScrollToPlugin';
 import WaterBottle from '../../Assets/water_bottle.glb';
+import GLTF from '../GLTF';
 
 const SeriesL2 = () => {
+    // eslint-disable-next-line 
+    const [rotation, setRotation] = useState({
+        x: 0,
+        y: 0,
+        z: 0
+    })
+
+    console.log(rotation, 'rotation')
 
     useEffect(() => {
 
@@ -34,6 +43,13 @@ const SeriesL2 = () => {
                     end: 'bottom bottom',
                     pin: true,
                     pinSpacing: false,
+                    onUpdate: (self) => {
+                        // eslint-disable-next-line 
+                        setRotation({
+                            ...rotation,
+                            y: 10 * self.progress
+                        })
+                    }
                     // markers: true
                 }
             })
@@ -58,6 +74,8 @@ const SeriesL2 = () => {
 
     }, [])
 
+
+
     return (
         <div className='flex flex-col w-full overflow-x-hidden'>
 
@@ -80,7 +98,7 @@ const SeriesL2 = () => {
             </div>
 
 
-            <div className='w-full flex flex-col min-h-screen lg:p-10 p-6 text-center relative'>
+            <div className='w-full flex flex-col min-h-screen text-center relative'>
 
                 <div className='flex flex-col items-center justify-start lg:p-10 p-6'>
                     <p className='section-sub-text'>Active Lifestyle Companion</p>
@@ -89,7 +107,7 @@ const SeriesL2 = () => {
                 </div>
 
                 <div className='w-5/12 mx-auto h-[550px]'>
-                    <GLTFViewer modelPath={WaterBottle} />
+                    <GLTFViewer parallax noControls={true} modelPath={WaterBottle} />
                 </div>
 
             </div>
@@ -110,8 +128,8 @@ const SeriesL2 = () => {
 
                 <div className="lg:w-6/12 h-full flex flex-col items-center justify-center pin-this-bottle lg:p-10 p-6">
 
-                    <div className='w-full h-[90%]'>
-                        <GLTFViewer modelPath={WaterBottle} />
+                    <div className='w-full h-full'>
+                        <GLTF rotation={rotation} modelPath={WaterBottle} />
                     </div>
 
                 </div>
@@ -127,7 +145,7 @@ const SeriesL2 = () => {
                     <div className='flex flex-col w-full h-full flex-shrink-0 items-center justify-center bottle-information-1 lg:p-10 p-6'>
 
 
-                        <div className='flex flex-col gap-2'>
+                        <div className='flex flex-col gap-2 w-10/12'>
 
                             <h3 className='lg:text-xl md:text-lg text-base text-[#121212] font-semibold'>Stay on track with your hydration goals effortlessly.</h3>
                             <p className='lg:text-xl md:text-lg text-base text-[#121212]'>The Series L2 bottle sends gentle vibration reminders to keep you drinking throughout the day.</p>
@@ -139,7 +157,7 @@ const SeriesL2 = () => {
 
                     <div className='flex flex-col w-full h-full flex-shrink-0 items-center justify-center bottle-information-2 lg:p-10 p-6'>
 
-                        <div className='flex flex-col gap-2'>
+                        <div className='flex flex-col gap-2 w-10/12'>
 
                             <h3 className='lg:text-xl md:text-lg text-base text-[#121212] font-semibold'>Built for comfort and durability, the Series L2 is made from Tritan™,</h3>
                             <p className='lg:text-xl md:text-lg text-base text-[#121212]'> offering a sleek, ergonomic design that feels natural to carry wherever you go.</p>
@@ -149,7 +167,7 @@ const SeriesL2 = () => {
 
                     <div className='flex flex-col w-full h-full flex-shrink-0 items-center justify-center bottle-information-3 lg:p-10 p-6'>
 
-                        <div className='flex flex-col gap-2'>
+                        <div className='flex flex-col gap-2 w-10/12'>
 
                             <h3 className='lg:text-xl md:text-lg text-base text-[#121212] font-semibold'>Get essential information at a glance. </h3>
                             <p className='lg:text-xl md:text-lg text-base text-[#121212]'>The dot matrix display shows the time, your daily water intake percentage, and fun animations, making hydration more engaging.</p>
@@ -158,7 +176,7 @@ const SeriesL2 = () => {
                     </div>
 
                     <div className='flex flex-col w-full h-full flex-shrink-0 items-center justify-center bottle-information-4 lg:p-10 p-6'>
-                        <div className='flex flex-col gap-2'>
+                        <div className='flex flex-col gap-2 w-10/12'>
 
                             <h3 className='lg:text-xl md:text-lg text-base text-[#121212] font-semibold'>Personalised Animations and Graffiti.</h3>
                             <p className='lg:text-xl md:text-lg text-base text-[#121212]'>Make your bottle your own with animations and graffiti displayed on the screen.</p>
@@ -212,8 +230,8 @@ const SeriesL2 = () => {
             <div className='w-full flex flex-col lg:p-10 p-6 text-center h-screen items-center justify-center bg-black text-white'>
 
                 <div className='flex flex-col text-center lg:gap-6 gap-4'>
-                    <h2 className='section-title lg:w-6/12 mx-auto leading-loose'>Sync, Connect and Drink Water Smarter with LWL8</h2>
-                    <p className='section-sub-text lg:w-6/12 mx-auto'>Step-by-step guide to syncing, utilising lights, and Bluetooth functionality.</p>
+                    <h2 className='lg:text-5xl/snug font-bold lg:w-6/12 mx-auto'>Sync, Connect and Drink Water Smarter with LWL8</h2>
+                    <p className='section-sub-text lg:w-5/12 mx-auto'>Step-by-step guide to syncing, utilising lights, and Bluetooth functionality.</p>
 
                     <button className='lg:text-base text-sm font-medium hover:underline'>See how it works</button>
                 </div>

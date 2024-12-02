@@ -10,16 +10,18 @@ import ScrollTrigger from 'gsap/dist/ScrollTrigger';
 import ScrollToPlugin from 'gsap/dist/ScrollToPlugin';
 
 
-const GLTFViewer = ({ modelPath, noControls, triggerAnimation }) => {
+const GLTFViewer = ({ modelPath, noControls, parallax, triggerAnimation }) => {
     const mountRef = useRef(null);
     const cameraRef = useRef(null);
 
+
+    gsap.registerPlugin(ScrollToPlugin, ScrollTrigger)
 
     useEffect(() => {
         const scene = new THREE.Scene();
 
         const camera = new THREE.PerspectiveCamera(
-            30,
+            35,
             mountRef.current.clientWidth / mountRef.current.clientHeight,
             0.1,
             1000
@@ -93,11 +95,13 @@ const GLTFViewer = ({ modelPath, noControls, triggerAnimation }) => {
                     scene.rotation.x = mouseY * 0.5;
                 };
 
-                window.addEventListener('mousemove', onMouseMove);
+                if (parallax) {
+                    window.addEventListener('mousemove', onMouseMove);
 
-                return () => {
-                    window.removeEventListener('mousemove', onMouseMove);
-                };
+                    return () => {
+                        window.removeEventListener('mousemove', onMouseMove);
+                    };
+                }
 
             },
             undefined,
@@ -106,19 +110,25 @@ const GLTFViewer = ({ modelPath, noControls, triggerAnimation }) => {
             }
         );
 
+
+
         const animate = () => {
             requestAnimationFrame(animate);
+
+
             controls.update();
             renderer.render(scene, camera);
         };
 
         animate();
 
+
         return () => {
             mountRef.current.removeChild(renderer.domElement);
             renderer.dispose();
         };
-    }, [modelPath]);
+    }, [modelPath, noControls, parallax]);
+
 
     useEffect(() => {
         if (!triggerAnimation || !cameraRef.current) return;
@@ -152,155 +162,3 @@ const GLTFViewer = ({ modelPath, noControls, triggerAnimation }) => {
 };
 
 export default GLTFViewer;
-
-
-/* eslint-disable */
-
-// import * as THREE from 'three';
-// import React, { useEffect, useRef, useState } from 'react';
-// import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-// import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-
-// import gsap from 'gsap/dist/gsap';
-// import ScrollTrigger from 'gsap/dist/ScrollTrigger';
-// import ScrollToPlugin from 'gsap/dist/ScrollToPlugin';
-
-// const GLTFViewer = ({ modelPath, noControls, triggerAnimation, rotation }) => {
-//     const mountRef = useRef(null);
-//     const cameraRef = useRef(null);
-//     const [model, setModel] = useState(null);
-
-//     useEffect(() => {
-//         const scene = new THREE.Scene();
-
-//         const camera = new THREE.PerspectiveCamera(
-//             30,
-//             mountRef.current.clientWidth / mountRef.current.clientHeight,
-//             0.1,
-//             1000
-//         );
-//         camera.position.set(0, 1.5, 3);
-//         cameraRef.current = camera;
-
-//         const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-//         renderer.setSize(mountRef.current.clientWidth, mountRef.current.clientHeight);
-//         mountRef.current.appendChild(renderer.domElement);
-
-//         const controls = new OrbitControls(camera, renderer.domElement);
-//         controls.enableDamping = true;
-
-//         // Ambient Light for overall illumination
-//         const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-//         scene.add(ambientLight);
-
-//         // Hemisphere Light for soft natural lighting
-//         const hemisphereLight = new THREE.HemisphereLight(0xffffff, 0x444444, 0.6);
-//         hemisphereLight.position.set(0, 20, 0);
-//         scene.add(hemisphereLight);
-
-//         // Directional Light to create shadows and depth
-//         const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-//         directionalLight.position.set(5, 10, 7.5);
-//         directionalLight.castShadow = true;
-//         directionalLight.shadow.camera.top = 10;
-//         directionalLight.shadow.camera.bottom = -10;
-//         directionalLight.shadow.camera.left = -10;
-//         directionalLight.shadow.camera.right = 10;
-//         directionalLight.shadow.mapSize.width = 1024;
-//         directionalLight.shadow.mapSize.height = 1024;
-//         scene.add(directionalLight);
-
-//         const loader = new GLTFLoader();
-//         loader.load(
-//             modelPath,
-//             (gltf) => {
-//                 const loadedModel = gltf.scene;
-//                 setModel(loadedModel);
-//                 loadedModel.scale.set(1, 1, 1);
-//                 scene.add(loadedModel);
-
-//                 const box = new THREE.Box3().setFromObject(loadedModel);
-//                 const size = box.getSize(new THREE.Vector3()).length();
-//                 const center = box.getCenter(new THREE.Vector3());
-
-//                 loadedModel.position.x += (loadedModel.position.x - center.x);
-//                 loadedModel.position.y += (loadedModel.position.y - center.y);
-//                 loadedModel.position.z += (loadedModel.position.z - center.z);
-
-//                 camera.near = size / 100;
-//                 camera.far = size * 100;
-//                 camera.updateProjectionMatrix();
-//                 camera.position.copy(center).add(new THREE.Vector3(0, size / 2, size * 1.5));
-//                 camera.lookAt(center);
-
-//                 if (noControls) {
-//                     controls.enableZoom = false;
-//                     controls.enableRotate = false;
-//                     controls.enablePan = false;
-//                 }
-
-//                 controls.update();
-//             },
-//             undefined,
-//             (error) => {
-//                 console.error('Error loading GLTF:', error);
-//             }
-//         );
-
-//         const animate = () => {
-//             requestAnimationFrame(animate);
-//             controls.update();
-//             renderer.render(scene, camera);
-//         };
-
-//         animate();
-
-//         return () => {
-//             mountRef.current.removeChild(renderer.domElement);
-//             renderer.dispose();
-//         };
-//     }, [modelPath, noControls]);
-
-//     useEffect(() => {
-//         if (!triggerAnimation || !cameraRef.current) return;
-
-//         const camera = cameraRef.current;
-//         const startZoom = 7;
-//         const endZoom = 0.6;
-//         const duration = 2500;
-//         let startTime = null;
-
-//         const zoomAnimation = (time) => {
-//             if (!startTime) startTime = time;
-//             const elapsed = time - startTime;
-//             let t = Math.min(elapsed / duration, 1);
-
-//             t = t * t; // Apply ease-in effect
-
-//             camera.zoom = THREE.MathUtils.lerp(startZoom, endZoom, t);
-//             camera.updateProjectionMatrix();
-
-//             if (t < 1) {
-//                 requestAnimationFrame(zoomAnimation);
-//             }
-//         };
-
-//         requestAnimationFrame(zoomAnimation);
-//     }, [triggerAnimation]);
-
-//     useEffect(() => {
-//         if (model) {
-//             gsap.to(model.rotation, {
-//                 x: rotation.x,
-//                 y: rotation.y,
-//                 z: rotation.z,
-//                 duration: 0.5,
-//                 ease: 'power2.out',
-//             });
-//         }
-//     }, [rotation, model]);
-
-//     return <div ref={mountRef} style={{ width: '100%', height: '100%' }} className="w-full h-full flex-shrink-0" />;
-// };
-
-// export default GLTFViewer;
