@@ -22,9 +22,9 @@
 }
 
 .section-sub-text {
-    @apply lg:text-lg text-sm font-semibold;
+    @apply lg:text-lg text-sm font-medium;
 }
 
 .section-title {
-    @apply font-bold lg:text-4xl text-2xl;
+    @apply font-bold lg:text-5xl text-2xl;
 }

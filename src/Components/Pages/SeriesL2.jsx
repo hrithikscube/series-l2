@@ -39,11 +39,11 @@ const SeriesL2 = () => {
             })
 
             gsap.to('.lifestyle-container', {
-                x: '-300%',
+                x: '-100%',
                 scrollTrigger: {
                     trigger: '.lifestyle-container',
                     start: 'top top',
-                    end: '600% bottom',
+                    end: '300% bottom',
                     // markers: true,
                     pin: '.lifestyle-container',
                     pinSpacing: true,
@@ -94,7 +94,7 @@ const SeriesL2 = () => {
                 <div className='flex flex-col text-center lg:gap-6 gap-4'>
                     <p className='section-sub-text'>Introducing Series L2</p>
 
-                    <h2 className='section-title lg:w-5/12 mx-auto'>Designed for those who live life on the go</h2>
+                    <h2 className='section-title lg:w-6/12 mx-auto'>Designed for those who live life on the go</h2>
 
                 </div>
             </div>
@@ -174,18 +174,18 @@ const SeriesL2 = () => {
                 <div className='flex flex-col text-center lg:gap-6 gap-4'>
                     <p className='section-sub-text'>Your Lifestyle Companion</p>
 
-                    <h2 className='section-title lg:w-5/12 mx-auto'>Designed to enhance your Active Lifestyle.</h2>
+                    <h2 className='section-title lg:w-8/12 mx-auto'>Designed to enhance your Active Lifestyle.</h2>
 
                 </div>
             </div>
 
             <div className='flex flex-col w-full h-screen lifestyle-container flex-shrink-0'>
-                <div className='flex flex-row items-start w-[400vw] flex-shrink-0 justify-start h-screen'>
+                <div className='flex flex-row items-start w-[200vw] flex-shrink-0 justify-start h-screen'>
 
                     {
-                        React.Children.toArray([...Array(4)].map((item, index) => (
-                            <div className='w-[100vw] flex-shrink-0 h-screen py-16 first:pl-20 pr-10'>
-                                <div className='flex flex-col w-full h-full relative rounded-2xl overflow-hidden'>
+                        React.Children.toArray([...Array(2)].map((item, index) => (
+                            <div className='w-[100vw] flex-shrink-0 h-screen py-14 last:pr-10 first:pl-10'>
+                                <div className='flex flex-col w-11/12 h-full relative rounded-2xl overflow-hidden first:ml-auto'>
 
                                     <img src={`https://picsum.photos/id/${50 + index}/1200/800`} alt="placeholder-image" className='w-full h-full object-cover ' />
 
