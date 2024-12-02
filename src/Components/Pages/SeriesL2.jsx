@@ -107,7 +107,7 @@ const SeriesL2 = () => {
                 </div>
 
                 <div className='w-5/12 mx-auto h-[550px]'>
-                    <GLTFViewer modelPath={WaterBottle} />
+                    <GLTFViewer noControls parallax modelPath={WaterBottle} />
                 </div>
 
             </div>
@@ -129,7 +129,7 @@ const SeriesL2 = () => {
                 <div className="lg:w-6/12 h-full flex flex-col items-center justify-center pin-this-bottle lg:p-10 p-6">
 
                     <div className='w-full h-full flex-shrink-0'>
-                        <GLTF noControls={true} rotation={rotation} modelPath={WaterBottle} />
+                        <GLTF noControls rotation={rotation} modelPath={WaterBottle} />
                     </div>
 
                 </div>
@@ -142,7 +142,7 @@ const SeriesL2 = () => {
                 <div className="lg:w-6/12 h-full flex flex-col flex-shrink-0">
 
 
-                    <div className='flex flex-col w-full h-full flex-shrink-0 items-center justify-center bottle-information-1 lg:p-10 p-6'>
+                    <div className='flex flex-col w-full h-full flex-shrink-0 items-center justify-center bottle-information-1 lg:pr-10 lg:pl-0 pr-6 pl-6'>
 
 
                         <div className='flex flex-col gap-2 w-10/12'>
@@ -155,7 +155,7 @@ const SeriesL2 = () => {
 
                     </div>
 
-                    <div className='flex flex-col w-full h-full flex-shrink-0 items-center justify-center bottle-information-2 lg:p-10 p-6'>
+                    <div className='flex flex-col w-full h-full flex-shrink-0 items-center justify-center bottle-information-2 lg:pr-10 lg:pl-0 pr-6 pl-6'>
 
                         <div className='flex flex-col gap-2 w-10/12'>
 
@@ -165,7 +165,7 @@ const SeriesL2 = () => {
                         </div>
                     </div>
 
-                    <div className='flex flex-col w-full h-full flex-shrink-0 items-center justify-center bottle-information-3 lg:p-10 p-6'>
+                    <div className='flex flex-col w-full h-full flex-shrink-0 items-center justify-center bottle-information-3 lg:pr-10 lg:pl-0 pr-6 pl-6'>
 
                         <div className='flex flex-col gap-2 w-10/12'>
 
@@ -175,7 +175,7 @@ const SeriesL2 = () => {
                         </div>
                     </div>
 
-                    <div className='flex flex-col w-full h-full flex-shrink-0 items-center justify-center bottle-information-4 lg:p-10 p-6'>
+                    <div className='flex flex-col w-full h-full flex-shrink-0 items-center justify-center bottle-information-4 lg:pr-10 lg:pl-0 pr-6 pl-6'>
                         <div className='flex flex-col gap-2 w-10/12'>
 
                             <h3 className='lg:text-xl md:text-lg text-base text-[#121212] font-semibold'>Personalised Animations and Graffiti.</h3>
