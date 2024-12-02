@@ -10,12 +10,12 @@ const Model = ({ modelPath, rotation }) => {
     const { scene } = useGLTF(modelPath);
 
     useEffect(() => {
-        if (groupRef.current) {
+        if (groupRef.current && typeof rotation !== 'undefined') {
             groupRef.current.rotation.set(rotation.x, rotation.y, rotation.z);
         }
     }, [rotation]);
 
-    return <primitive ref={groupRef} object={scene} scale={[0.55, 0.55, 0.55]} />;
+    return <primitive ref={groupRef} object={scene} scale={[0.55, 0.55, 0.55]} position={[0, 0, 0.6]} />;
 };
 
 const Lights = () => {

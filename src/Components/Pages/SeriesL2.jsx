@@ -107,7 +107,7 @@ const SeriesL2 = () => {
                 </div>
 
                 <div className='w-5/12 mx-auto h-[550px]'>
-                    <GLTFViewer parallax noControls={true} modelPath={WaterBottle} />
+                    <GLTFViewer modelPath={WaterBottle} />
                 </div>
 
             </div>
