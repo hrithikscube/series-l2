@@ -1,13 +1,14 @@
+/* eslint-disable */
+
+import GLTF from '../GLTF';
 import gsap from 'gsap/dist/gsap';
 import GLTFViewer from '../GLTFViewer';
 import React, { useEffect, useState } from 'react';
 import ScrollTrigger from 'gsap/dist/ScrollTrigger';
 import ScrollToPlugin from 'gsap/dist/ScrollToPlugin';
 import WaterBottle from '../../Assets/water_bottle.glb';
-import GLTF from '../GLTF';
 
 const SeriesL2 = () => {
-    // eslint-disable-next-line 
     const [rotation, setRotation] = useState({
         x: 0,
         y: 0,
@@ -44,7 +45,6 @@ const SeriesL2 = () => {
                     pin: true,
                     pinSpacing: false,
                     onUpdate: (self) => {
-                        // eslint-disable-next-line 
                         setRotation({
                             ...rotation,
                             y: 10 * self.progress

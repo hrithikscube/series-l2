@@ -1,9 +1,9 @@
 /* eslint-disable */
 
+import * as THREE from 'three';
 import React, { useRef, useEffect } from 'react';
 import { Canvas, useThree } from '@react-three/fiber';
 import { OrbitControls, useGLTF } from '@react-three/drei';
-import * as THREE from 'three';
 
 const Model = ({ modelPath, rotation }) => {
     const groupRef = useRef();
@@ -15,7 +15,7 @@ const Model = ({ modelPath, rotation }) => {
         }
     }, [rotation]);
 
-    return <primitive ref={groupRef} object={scene} scale={[0.5, 0.5, 0.5]} />;
+    return <primitive ref={groupRef} object={scene} scale={[0.55, 0.55, 0.55]} />;
 };
 
 const Lights = () => {
@@ -64,7 +64,7 @@ const CameraAnimation = ({ triggerAnimation }) => {
 
 const GLTF = ({ modelPath, noControls, rotation, triggerAnimation }) => {
     return (
-        <Canvas shadows camera={{ position: [0, 3, 3], fov: 50, isPerspectiveCamera: true }}>
+        <Canvas shadows camera={{ position: [0, 3, 3.5], fov: 45, isPerspectiveCamera: true }}>
             <Lights />
             <Model modelPath={modelPath} rotation={rotation} />
             {!noControls && <OrbitControls enableDamping />}

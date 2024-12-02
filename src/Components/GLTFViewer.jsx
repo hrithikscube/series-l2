@@ -14,7 +14,6 @@ const GLTFViewer = ({ modelPath, noControls, parallax, triggerAnimation }) => {
     const mountRef = useRef(null);
     const cameraRef = useRef(null);
 
-
     gsap.registerPlugin(ScrollToPlugin, ScrollTrigger)
 
     useEffect(() => {
