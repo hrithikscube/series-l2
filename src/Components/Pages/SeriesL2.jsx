@@ -128,8 +128,8 @@ const SeriesL2 = () => {
 
                 <div className="lg:w-6/12 h-full flex flex-col items-center justify-center pin-this-bottle lg:p-10 p-6">
 
-                    <div className='w-full h-full'>
-                        <GLTF rotation={rotation} modelPath={WaterBottle} />
+                    <div className='w-full h-full flex-shrink-0'>
+                        <GLTF noControls={true} rotation={rotation} modelPath={WaterBottle} />
                     </div>
 
                 </div>

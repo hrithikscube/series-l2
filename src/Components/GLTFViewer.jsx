@@ -20,7 +20,7 @@ const GLTFViewer = ({ modelPath, noControls, parallax, triggerAnimation }) => {
         const scene = new THREE.Scene();
 
         const camera = new THREE.PerspectiveCamera(
-            35,
+            32,
             mountRef.current.clientWidth / mountRef.current.clientHeight,
             0.1,
             1000
