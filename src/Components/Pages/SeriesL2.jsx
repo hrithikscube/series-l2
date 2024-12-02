@@ -1,11 +1,9 @@
-import React, { useEffect } from 'react'
-
-import gsap from 'gsap/dist/gsap'
-import ScrollTrigger from 'gsap/dist/ScrollTrigger'
-import ScrollToPlugin from 'gsap/dist/ScrollToPlugin'
-import GLTFViewer from '../GLTFViewer'
-
-import WaterBottle from '../../Assets/water_bottle.glb'
+import gsap from 'gsap/dist/gsap';
+import GLTFViewer from '../GLTFViewer';
+import React, { useEffect } from 'react';
+import ScrollTrigger from 'gsap/dist/ScrollTrigger';
+import ScrollToPlugin from 'gsap/dist/ScrollToPlugin';
+import WaterBottle from '../../Assets/water_bottle.glb';
 
 const SeriesL2 = () => {
 
@@ -14,6 +12,19 @@ const SeriesL2 = () => {
         gsap.registerPlugin(ScrollToPlugin, ScrollTrigger)
 
         let ctx = gsap.context(() => {
+
+            gsap.set('.dot-matrix-text', {
+                x: '100%',
+                opacity: 0,
+            })
+
+            gsap.to('.dot-matrix-text', {
+                x: '-100%',
+                duration: 20,
+                ease: 'none',
+                opacity: 100,
+                repeat: -1
+            })
 
             gsap.to('.pin-this-bottle', {
                 scrollTrigger: {
@@ -53,12 +64,12 @@ const SeriesL2 = () => {
 
             <div className='w-full h-screen flex flex-col items-center justify-center lg:p-10 p-6 bg-black'>
 
-                <div className='w-full h-44 relative'>
+                <div className='w-full h-44 relative overflow-x-hidden'>
                     <div>
                         <img src="dot-matrix.svg" alt="dot-matrix" className='w-full h-full object-cover' />
                     </div>
 
-                    <div className='w-full h-full absolute top-0 left-0 flex items-center justify-center'>
+                    <div className='w-full h-full absolute top-0 left-0 flex items-center justify-center dot-matrix-text'>
 
                         <h1 className='lg:text-9xl text-glow text-4xl doto text-center text-white'>LWL8 Series L2</h1>
 
@@ -176,7 +187,7 @@ const SeriesL2 = () => {
                             <div className='w-[100vw] flex-shrink-0 h-screen py-16 first:pl-20 pr-10'>
                                 <div className='flex flex-col w-full h-full relative rounded-2xl overflow-hidden'>
 
-                                    <img src={`https://picsum.photos/id/${50 + index}/900/600`} alt="placeholder-image" className='w-full h-full object-cover ' />
+                                    <img src={`https://picsum.photos/id/${50 + index}/1200/800`} alt="placeholder-image" className='w-full h-full object-cover ' />
 
                                     <div className='w-full min-h-20 bg-black/40 flex flex-col items-center justify-end lg:p-10 p-4 absolute left-0 bottom-0'>
                                         <p className='lg:text-base text-sm lg:leading-normal leading-loose text-white text-center lg:w-5/12 mx-auto'>The Series L1 supports your fitness goals, reminding you to refuel after every rep or run.</p>
