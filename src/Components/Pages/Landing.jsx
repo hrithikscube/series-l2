@@ -1,15 +1,61 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+
+import gsap from 'gsap/dist/gsap';
+import ScrollTrigger from 'gsap/dist/ScrollTrigger';
+import ScrollToPlugin from 'gsap/dist/ScrollToPlugin';
 
 const Landing = () => {
 
     const navigate = useNavigate()
 
+    useEffect(() => {
+
+        gsap.registerPlugin(ScrollToPlugin, ScrollTrigger)
+
+        let ctx = gsap.context(() => {
+
+            gsap.to('.hydration-made-smarter', {
+                opacity: 0
+            })
+
+            gsap.fromTo('.water-logo-animate', {
+                y: '50%',
+                scale: 2,
+            }, {
+                y: '0%',
+                scale: 1,
+                duration: 2,
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: '.water-logo-animate',
+                },
+                onComplete: () => {
+                    setEnableScroll(true)
+                    gsap.to('.hydration-made-smarter', {
+                        opacity: 1,
+                        duration: 1,
+                        ease: 'none'
+                    })
+                }
+            })
+
+        })
+
+        return () => ctx.revert()
+
+    }, [])
+
+    const [enableScroll, setEnableScroll] = useState(false)
+
     return (
-        <div className='flex flex-col relative lg:w-10/12 w-11/12 mx-auto'>
+        <div className={`flex flex-col lg:w-10/12 w-11/12 mx-auto relative ${enableScroll ? '' : 'h-screen overflow-hidden'}`}>
 
-            <div className='w-full mx-auto flex flex-col lg:py-20 py-10'>
+            <div className='flex flex-col w-full items-center justify-start h-screen absolute top-0 left-0 lg:py-20 py-10 water-logo-animate'>
+                <img src="/series-l2/water_logo.svg" alt="water_logo" className='w-96 h-40 mx-auto' />
+            </div>
 
+            <div className='w-full mx-auto flex flex-col lg:py-20 py-10 hydration-made-smarter opacity-0'>
 
                 <img src="/series-l2/water_logo.svg" alt="water_logo" className='w-96 h-40 mx-auto' />
 
@@ -40,6 +86,10 @@ const Landing = () => {
 
                         </div>
 
+                        <div className='w-full h-60'>
+                            <img src="/series-l2/l2.svg" alt="l2" className='w-full h-full object-contain' />
+                        </div>
+
                         <div className='flex items-end w-full justify-between'>
                             <div>
                                 <h2 className='lg:text-lg md:text-base text-sm font-semibold text-[#121212]'>$ 78</h2>
@@ -67,6 +117,10 @@ const Landing = () => {
                                 }}
                                 className='lg:text-base md:text-sm text-xs text-[#121212] font-medium'>Learn More</button>
 
+                        </div>
+
+                        <div className='w-full h-60'>
+                            <img src="/series-l2/l2.svg" alt="l2" className='w-full h-full object-contain' />
                         </div>
 
                         <div className='flex items-end w-full justify-between'>
@@ -132,7 +186,6 @@ const Landing = () => {
                 </button>
             </div>
 
-
             <div className='w-full flex flex-col lg:p-10 p-6 text-center lg:py-20 py-10'>
 
                 <div className='flex flex-col text-center gap-2'>
@@ -181,7 +234,6 @@ const Landing = () => {
 
             </div>
 
-
             <div className=''>
                 <div className='bg-[#f2f2f2] w-10/12 mx-auto overflow-hidden rounded-3xl lg:h-[550px] h-[450px] flex-shrink-0 lg:p-10 p-6 flex flex-col justify-end relative'>
 
@@ -214,7 +266,6 @@ const Landing = () => {
                 </div>
 
             </div>
-
 
             <div className='flex items-center justify-start lg:gap-10 gap-8 w-full mx-auto pb-10 snap-x snap-mandatory overflow-x-auto'>
 
@@ -258,10 +309,6 @@ const Landing = () => {
 
                 </button>
             </div>
-
-
-
-
 
         </div>
     )
