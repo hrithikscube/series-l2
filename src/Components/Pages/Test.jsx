@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Canvas, useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 import React, { useEffect, useRef, useState } from 'react';
