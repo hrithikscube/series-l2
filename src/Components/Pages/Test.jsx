@@ -1,15 +1,28 @@
 import { Canvas } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import WaterBottle from '../../Assets/water_bottle.glb';
 
 import gsap from 'gsap/dist/gsap'
 import ScrollTrigger from 'gsap/dist/ScrollTrigger';
 import ScrollToPlugin from 'gsap/dist/ScrollToPlugin';
 
-const Model = ({ modelPath }) => {
+const Model = ({ modelPath, rotation, position }) => {
     const groupRef = useRef();
     const { scene } = useGLTF(modelPath);
+
+    useEffect(() => {
+        if (groupRef.current && typeof rotation !== 'undefined') {
+            groupRef.current.rotation.set(rotation.x, rotation.y, rotation.z);
+        }
+    }, [rotation]);
+
+    useEffect(() => {
+        if (groupRef.current && typeof position !== 'undefined') {
+            groupRef.current.position.set(position.x, position.y, position.z);
+        }
+    }, [position]);
+
 
     return <primitive ref={groupRef} object={scene} scale={[1, 1, 1]} position={[0, -1, 0]} />;
 }
@@ -34,6 +47,14 @@ const Lights = () => {
 
 const Test = () => {
 
+    const [rotation, setRotation] = useState({
+        x: 0, y: 0, z: 0
+    })
+
+    const [position, setPosition] = useState({
+        x: 0, y: -1, z: 0
+    })
+
     useEffect(() => {
 
         gsap.registerPlugin(ScrollToPlugin, ScrollTrigger)
@@ -49,6 +70,13 @@ const Test = () => {
                     end: 'bottom bottom',
                     pinSpacing: false,
                     markers: true,
+                    onUpdate: (self) => {
+                        setRotation({
+                            ...rotation,
+                            x: 10 * self.progress,
+                            y: 10 * self.progress,
+                        })
+                    }
                 }
             })
 
@@ -62,7 +90,7 @@ const Test = () => {
         <div>
             <div className='flex flex-col items-center justify-center w-full h-screen water-bottle-section'>
                 <Canvas shadows camera={{ position: [0, 3.5, 6], fov: 50 }}>
-                    <Model modelPath={WaterBottle} />
+                    <Model modelPath={WaterBottle} rotation={rotation} position={position} />
                     <Lights />
                     {/* <OrbitControls /> */}
                 </Canvas>

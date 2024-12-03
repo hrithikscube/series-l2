@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-
 import gsap from 'gsap/dist/gsap';
+import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import ScrollTrigger from 'gsap/dist/ScrollTrigger';
 import ScrollToPlugin from 'gsap/dist/ScrollToPlugin';
 
@@ -20,13 +19,13 @@ const Landing = () => {
             })
 
             gsap.fromTo('.water-logo-animate', {
-                y: '50%',
+                y: '55%',
                 scale: 2,
             }, {
                 y: '0%',
                 scale: 1,
                 duration: 2,
-                ease: 'none',
+                ease: 'power1.inOut',
                 scrollTrigger: {
                     trigger: '.water-logo-animate',
                 },
@@ -34,8 +33,9 @@ const Landing = () => {
                     gsap.to('.hydration-made-smarter', {
                         opacity: 1,
                         duration: 1,
-                        ease: 'none',
+                        ease: 'power1.inOut',
                         onComplete: () => {
+                            // once initial section is visible allow scroll
                             setEnableScroll(true)
                         }
                     })
