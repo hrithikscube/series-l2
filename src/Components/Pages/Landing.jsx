@@ -24,7 +24,7 @@ const Landing = () => {
             }, {
                 y: '0%',
                 scale: 1,
-                duration: 2,
+                duration: 3,
                 ease: 'power1.inOut',
                 scrollTrigger: {
                     trigger: '.water-logo-animate',
@@ -56,18 +56,18 @@ const Landing = () => {
             {
                 !enableScroll &&
                 <div className='flex flex-col w-full items-center justify-start h-screen absolute top-0 left-0 lg:py-20 py-10 water-logo-animate'>
-                    <img src="/series-l2/water_logo.svg" alt="water_logo" className='w-96 h-40 mx-auto' />
+                    <img src="/series-l2/water_logo.svg" alt="water_logo" className='lg:w-96 lg:h-40 w-44 h-32 mx-auto' />
                 </div>
             }
 
             <div className='w-full mx-auto flex flex-col lg:py-20 py-10 hydration-made-smarter opacity-0'>
 
-                <img src="/series-l2/water_logo.svg" alt="water_logo" className='w-96 h-40 mx-auto' />
+                <img src="/series-l2/water_logo.svg" alt="water_logo" className='lg:w-96 lg:h-40 w-44 h-32 mx-auto' />
 
 
                 <div className='flex flex-col lg:gap-6 gap-4 text-center lg:mt-6 mt-4'>
 
-                    <h1 className='lg:text-7xl text-6xl font-bold text-[#121212]'>Hydration Made Smarter</h1>
+                    <h1 className='lg:text-7xl text-4xl md:text-6xl font-bold text-[#121212]'>Hydration Made Smarter</h1>
                     <p className='lg:text-base text-sm text-[#121212]'>Track your water intake, stay hydrated, and embrace a sustainable lifestyle with LWL8.</p>
 
                 </div>
@@ -75,19 +75,19 @@ const Landing = () => {
 
                 <div className='grid lg:grid-cols-2 lg:gap-10 gap-6 w-full lg:mt-10 mt-6'>
 
-                    <div className='bg-[#f2f2f2] rounded-2xl flex flex-col justify-between h-[500px] lg:p-8 p-6'>
+                    <div className='bg-[#f2f2f2] rounded-2xl flex flex-col justify-between h-[450px] lg:h-[500px] lg:p-8 p-6'>
 
                         <div className='flex items-start w-full justify-between'>
                             <div>
-                                <h2 className='lg:text-lg md:text-base text-sm font-semibold text-[#121212]'>Series L1</h2>
-                                <p className='lg:text-base md:text-sm text-xs text-[#121212]'>Designed for those who live life on the go</p>
+                                <h2 className='lg:text-lg text-base font-semibold text-[#121212]'>Series L1</h2>
+                                <p className='lg:text-base text-sm text-[#121212]'>Designed for those who live life on the go</p>
                             </div>
 
                             <button
                                 onClick={() => {
                                     navigate('/series-l2')
                                 }}
-                                className='lg:text-base md:text-sm text-xs text-[#121212] font-medium'>Learn More</button>
+                                className='lg:text-base text-sm text-[#121212] font-medium lg:block hidden'>Learn More</button>
 
                         </div>
 
@@ -97,30 +97,34 @@ const Landing = () => {
 
                         <div className='flex items-end w-full justify-between'>
                             <div>
-                                <h2 className='lg:text-lg md:text-base text-sm font-semibold text-[#121212]'>$ 78</h2>
-                                <p className='lg:text-base md:text-sm text-xs text-[#121212]'>Inclusive of taxes</p>
+                                <h2 className='lg:text-lg text-base font-semibold text-[#121212]'>$ 78</h2>
+                                <p className='lg:text-base text-sm text-[#121212]'>Inclusive of taxes</p>
                             </div>
 
-                            <button className='lg:text-sm text-xs bg-[#121212]/90 text-white rounded-full p-2 px-4 font-medium'>Buy Now</button>
+                            <button
+                                onClick={() => {
+                                    navigate('/series-l2')
+                                }}
+                                className='text-sm bg-[#121212]/90 text-white rounded-full p-2 px-4 font-medium'>Buy Now</button>
 
                         </div>
 
 
                     </div>
 
-                    <div className='bg-[#f2f2f2] rounded-2xl flex flex-col justify-between h-[500px] lg:p-8 p-6'>
+                    <div className='bg-[#f2f2f2] rounded-2xl flex flex-col justify-between h-[450px] lg:h-[500px] lg:p-8 p-6'>
 
                         <div className='flex items-start w-full justify-between'>
                             <div>
-                                <h2 className='lg:text-lg md:text-base text-sm font-semibold text-[#121212]'>Series L2</h2>
-                                <p className='lg:text-base md:text-sm text-xs text-[#121212]'>Designed for those who live life on the go</p>
+                                <h2 className='lg:text-lg text-base font-semibold text-[#121212]'>Series L2</h2>
+                                <p className='lg:text-base text-sm text-[#121212]'>Designed for those who live life on the go</p>
                             </div>
 
                             <button
                                 onClick={() => {
                                     navigate('/series-l2')
                                 }}
-                                className='lg:text-base md:text-sm text-xs text-[#121212] font-medium'>Learn More</button>
+                                className='lg:text-base text-sm text-[#121212] font-medium lg:block hidden'>Learn More</button>
 
                         </div>
 
@@ -130,11 +134,15 @@ const Landing = () => {
 
                         <div className='flex items-end w-full justify-between'>
                             <div>
-                                <h2 className='lg:text-lg md:text-base text-sm font-semibold text-[#121212]'>$ 78</h2>
-                                <p className='lg:text-base md:text-sm text-xs text-[#121212]'>Inclusive of taxes</p>
+                                <h2 className='lg:text-lg text-base font-semibold text-[#121212]'>$ 78</h2>
+                                <p className='lg:text-base text-sm text-[#121212]'>Inclusive of taxes</p>
                             </div>
 
-                            <button className='lg:text-sm text-xs bg-[#121212]/90 text-white rounded-full p-2 px-4 font-medium'>Buy Now</button>
+                            <button
+                                onClick={() => {
+                                    navigate('/series-l2')
+                                }}
+                                className='text-sm bg-[#121212]/90 text-white rounded-full p-2 px-4 font-medium'>Buy Now</button>
 
                         </div>
 
@@ -161,7 +169,7 @@ const Landing = () => {
 
                 {
                     [1, 2, 3].map(item => (
-                        <div className='bg-[#f2f2f2] w-full rounded-3xl h-[450px] lg:h-[650px] flex-shrink-0 lg:p-10 p-6 flex flex-col justify-end'>
+                        <div className='bg-[#f2f2f2] w-full rounded-3xl h-[450px] lg:h-[650px] flex-shrink-0 lg:p-10 p-6 flex flex-col justify-end snap-center'>
                             <div className='grid lg:grid-cols-2 items-center w-full '>
 
                                 <h2 className='lg:text-lg text-base font-medium text-[#121212]'>Smart Hydration Tracking </h2>
@@ -182,7 +190,7 @@ const Landing = () => {
                         <img src="/series-l2/slider-arrow.svg" alt="slider-arrow" className='w-5 h-5' />
                     </div>
 
-                    <p className='flex items-center justify-center'>1/5</p>
+                    <p className='flex items-center justify-center lg:text-sm text-sm'>1/5</p>
 
                     <div className='flex items-center justify-center'>
                         <img src="/series-l2/slider-arrow.svg" alt="slider-arrow" className='w-5 h-5 -rotate-180' />
@@ -205,7 +213,7 @@ const Landing = () => {
 
                 {
                     [1, 2, 3].map((item, index) => (
-                        <div className='bg-[#f2f2f2] w-full rounded-3xl lg:h-[550px] lg:text-[4rem] font-semibold  h-96 flex-shrink-0 lg:p-10 p-6 flex flex-col justify-center items-center'>
+                        <div className='bg-[#f2f2f2] w-full rounded-3xl lg:h-[550px] lg:text-[4rem] font-semibold  h-96 flex-shrink-0 lg:p-10 p-6 flex flex-col justify-center items-center snap-center'>
                             {index + 1}
                         </div>
                     ))
@@ -213,14 +221,14 @@ const Landing = () => {
 
             </div>
 
-            <div className='flex items-center justify-end -mt-20 pr-10'>
+            <div className='flex items-center justify-end -mt-20 lg:pr-10 pr-6'>
                 <button className='w-32 grid grid-cols-3 items-center rounded-full bg-[#E0E0E0] p-3 '>
 
                     <div className='flex items-center justify-center'>
                         <img src="/series-l2/slider-arrow.svg" alt="slider-arrow" className='w-5 h-5' />
                     </div>
 
-                    <p className='flex items-center justify-center'>1/5</p>
+                    <p className='flex items-center justify-center lg:text-sm text-sm'>1/5</p>
 
                     <div className='flex items-center justify-center'>
                         <img src="/series-l2/slider-arrow.svg" alt="slider-arrow" className='w-5 h-5 -rotate-180' />
@@ -229,7 +237,7 @@ const Landing = () => {
                 </button>
             </div>
 
-            <div className='w-full flex flex-col lg:p-10 p-6 text-center lg:py-20 py-10'>
+            <div className='w-full flex flex-col lg:p-10 p-6 text-center lg:pt-20 pt-20 pb-10'>
 
                 <div className='flex flex-col text-center gap-2'>
                     <p className='section-sub-text'>The LWL8 App</p>
@@ -240,9 +248,9 @@ const Landing = () => {
             </div>
 
             <div className=''>
-                <div className='bg-[#f2f2f2] w-10/12 mx-auto overflow-hidden rounded-3xl lg:h-[550px] h-[450px] flex-shrink-0 lg:p-10 p-6 flex flex-col justify-end relative'>
+                <div className='bg-[#f2f2f2] lg:w-10/12 mx-auto overflow-hidden rounded-3xl lg:h-[550px] h-[450px] flex-shrink-0 lg:p-10 p-6 flex flex-col justify-end relative'>
 
-                    <div className='w-full min-h-16 bg-[#121212]/80 bottom-0 left-0 absolute flex items-center justify-center text-center'>
+                    <div className='w-full lg:min-h-16 bg-[#121212]/80 bottom-0 left-0 absolute flex items-center justify-center text-center p-6'>
 
                         <p className='lg:text-base text-sm text-[#f2f2f2]'>Define your daily hydration target to stay on track.</p>
 
@@ -252,7 +260,7 @@ const Landing = () => {
                 <div className='grid lg:grid-cols-7 items-center w-full mt-6'>
                     {
                         ["Set Goal", "Track Intake", "Get Intake Reminders", "Bottle Settings", "Get more Insights", "Find your Bottle", "Intake History"].map(item => (
-                            <h2 className='text-sm text-[#121212]/90 font-medium h-[52px] flex flex-col items-center justify-center border-r border-[#808080]/20 px-5'>{item}</h2>
+                            <h2 className='text-sm text-[#121212]/90 font-medium h-[52px] flex flex-col items-center justify-center lg:border-r border-[#808080]/20 px-5'>{item}</h2>
                         ))
                     }
                 </div>
@@ -276,21 +284,19 @@ const Landing = () => {
 
                 {
                     [...Array(5)].map(item => (
-                        <div className='w-8/12 mx-auto flex flex-row flex-shrink-0 bg-[#f2f2f2] h-96 rounded-3xl overflow-x-hidden'>
+                        <div className='lg:w-8/12 w-full mx-auto flex flex-col lg:flex-row flex-shrink-0 bg-[#f2f2f2] h-96 rounded-3xl overflow-x-hidden snap-center'>
 
-                            <div className='w-1/2 flex-shrink-0 h-full'>
+                            <div className='lg:w-1/2 flex-shrink-0 h-1/2 lg:h-full'>
                                 <img src="/series-l2/hiker.jpeg" alt="hiker" className='w-full h-full object-cover' />
                             </div>
 
-                            <div className='w-1/2 flex-shrink-0 h-full lg:p-8 p-4 flex flex-col lg:gap-4 gap-2 overflow-y-auto'>
+                            <div className='lg:w-1/2 flex-shrink-0 lg:h-full h-1/2 overflow-y-auto lg:p-8 p-4 flex flex-col lg:gap-4 gap-2'>
 
                                 <h3 className='lg:text-base text-sm font-medium text-[#121212]'>Zain Bergson <span className='font-[400] text-xs lg:text-sm'> &nbsp;&nbsp; Fitness enthusiast.</span></h3>
 
 
-                                <h4 className='lg:text-2xl text-xl font-semibold text-[#121212]'>LWL8 has completely changed the way I stay hydrated!</h4>
-
-                                <p className='lg:text-base text-sm text-[#121212]'>As someone always on the go, I used to struggle with drinking enough water during the day. Since getting the LWL8 smart bottle, I don’t have to think twice! The personalized reminders and hydration tracking features keep me on top of my water intake effortlessly.</p>
-
+                                <h4 className='lg:text-2xl text-lg md:text-xl font-semibold text-[#121212]'>LWL8 has completely changed the way I stay hydrated!</h4>
+                                <p className='lg:text-base text-sm text-[#121212] '>As someone always on the go, I used to struggle with drinking enough water during the day. Since getting the LWL8 smart bottle, I don’t have to think twice! The personalized reminders and hydration tracking features keep me on top of my water intake effortlessly.</p>
                             </div>
 
                         </div>
@@ -306,7 +312,7 @@ const Landing = () => {
                         <img src="/series-l2/slider-arrow.svg" alt="slider-arrow" className='w-5 h-5' />
                     </div>
 
-                    <p className='flex items-center justify-center'>1/5</p>
+                    <p className='flex items-center justify-center lg:text-sm text-sm'>1/5</p>
 
                     <div className='flex items-center justify-center'>
                         <img src="/series-l2/slider-arrow.svg" alt="slider-arrow" className='w-5 h-5 -rotate-180' />

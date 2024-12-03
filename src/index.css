@@ -22,7 +22,7 @@
 }
 
 .section-sub-text {
-    @apply lg:text-lg text-sm font-medium;
+    @apply lg:text-lg text-base font-medium;
 }
 
 .section-title {

@@ -32,15 +32,15 @@ const SeriesL2 = () => {
 
             gsap.set('.dot-matrix-text', {
                 x: '100%',
-                opacity: 0,
+                // opacity: 0,
             })
 
             gsap.to('.dot-matrix-text', {
-                x: '-100%',
-                duration: 15,
+                x: '0%',
+                duration: 10,
                 ease: 'none',
                 opacity: 100,
-                repeat: -1
+                // repeat: -1
             })
 
             gsap.to('.pin-this-bottle', {
@@ -57,7 +57,6 @@ const SeriesL2 = () => {
                             y: 10 * self.progress
                         })
                     }
-                    // markers: true
                 }
             })
 
@@ -67,7 +66,6 @@ const SeriesL2 = () => {
                     trigger: '.lifestyle-container',
                     start: 'top top',
                     end: '300% bottom',
-                    // markers: true,
                     pin: '.lifestyle-container',
                     pinSpacing: true,
                     scrub: 1
@@ -88,63 +86,43 @@ const SeriesL2 = () => {
                     trigger: '.active-lifestyle-section',
                     start: '40% top',
                     end: '120% bottom',
-                    // markers: true,
                     scrub: 2
+                }
+            })
+
+            gsap.to('.app-text', {
+                opacity: 100,
+                ease: 'none',
+                stagger: 0.5,
+                scrollTrigger: {
+                    trigger: '.lwl8-app-section',
+                    pin: '.lwl8-app-section',
+                    start: 'top top',
+                    end: '200% bottom',
+                    // markers: true,
+                    pinSpacing: false,
+                    scrub: 1
                 }
             })
 
 
         })
 
-        gsap.set('.lwl8-app', {
-            opacity: 0,
-            y: '100%'
-        })
-
-        gsap.to('.lwl8-app', {
-            opacity: 100,
-            duration: 4,
-            y: 0,
-            ease: 'power1.inOut',
-            scrollTrigger: {
-                trigger: '.lwl8-app-section',
-                start: '-50% top',
-                end: 'bottom bottom',
-                // markers: true,
-                scrub: 2
-            }
-        })
-
-
-        gsap.to('.app-text', {
-            opacity: 100,
-            ease: 'none',
-            stagger: 0.5,
-            scrollTrigger: {
-                trigger: '.lwl8-app-section',
-                start: '-50% top',
-                end: 'bottom bottom',
-                // markers: true,
-                scrub: 1
-            }
-        })
-
-
         return () => ctx.revert()
 
     }, [])
 
 
-
     return (
-        <div className='flex flex-col w-full overflow-x-hidden'>
+        <div className='flex flex-col w-full overflow-x-hidden relative'>
 
 
             <div className='w-full h-screen flex flex-col items-center justify-center lg:p-10 p-6 bg-black'>
 
-                <div className='w-full h-44 relative overflow-x-hidden'>
+                <div className='w-full lg:h-44 h-20 relative overflow-x-hidden'>
+
                     <div>
-                        <img src="/series-l2/dot-matrix.svg" alt="dot-matrix" className='w-full h-full object-cover' />
+                        <img src="/series-l2/dot-matrix.svg" alt="dot-matrix" className='w-full lg:h-44 h-20 object-cover' />
                     </div>
 
                     <div className='w-full h-full absolute top-0 left-0 flex items-center justify-center dot-matrix-text opacity-0'>
@@ -160,11 +138,11 @@ const SeriesL2 = () => {
 
             <div className='w-full flex flex-col min-h-screen text-center relative py-10 active-lifestyle-section'>
 
-                <div className='w-full h-full absolute top-0 left-0 z-10'>
+                {/* <div className='w-full h-full absolute top-0 left-0 z-10'>
 
                     <img src="/series-l2/hero-background.jpeg" alt="hero_background" className='w-full h-full object-cover opacity-30' />
 
-                </div>
+                </div> */}
 
 
                 <div className='flex flex-col z-20 relative'>
@@ -174,7 +152,7 @@ const SeriesL2 = () => {
                         <h2 className='font-bold text-black/80 lg:text-8xl text-7xl'>Series L2</h2>
                     </div>
 
-                    <div className='w-5/12 mx-auto h-[550px] lifestyle-contents'>
+                    <div className='lg:w-5/12 w-full mx-auto h-[550px] lifestyle-contents'>
                         <GLTFViewer noControls parallax modelPath={WaterBottle} />
                     </div>
                 </div>
@@ -195,7 +173,7 @@ const SeriesL2 = () => {
 
             <div className='flex flex-row w-full h-screen intro-section'>
 
-                <div className="lg:w-6/12 h-full flex flex-col items-center justify-center pin-this-bottle lg:p-10 p-6">
+                <div className="lg:w-6/12 w-full h-full flex flex-col items-center justify-center pin-this-bottle lg:p-10 p-6">
 
                     <div className='w-full h-full flex-shrink-0'>
                         <GLTF noControls rotation={rotation} modelPath={WaterBottle} />
@@ -206,18 +184,18 @@ const SeriesL2 = () => {
             </div>
 
 
-            <div className='flex flex-row w-full h-screen items-end justify-end -mt-[100vh]'>
+            <div className='flex lg:flex-row flex-col w-full h-screen items-end justify-end -mt-[100vh]'>
 
-                <div className="lg:w-6/12 h-full flex flex-col flex-shrink-0">
+                <div className="lg:w-6/12 w-full h-full flex flex-col flex-shrink-0">
 
 
                     <div className='flex flex-col w-full h-full flex-shrink-0 items-center justify-center bottle-information-1 lg:pr-10 lg:pl-0 pr-6 pl-6'>
 
 
-                        <div className='flex flex-col gap-2 w-8/12'>
+                        <div className='flex flex-col gap-2 lg:w-8/12 w-full'>
 
-                            <h3 className='lg:text-2xl md:text-lg text-base text-black font-semibold'>Stay on track with your hydration goals effortlessly.</h3>
-                            <p className='lg:text-2xl md:text-lg text-base text-black'>The Series L2 bottle sends gentle vibration reminders to keep you drinking throughout the day.</p>
+                            <h3 className='lg:text-2xl text-lg text-black font-semibold'>Stay on track with your hydration goals effortlessly.</h3>
+                            <p className='lg:text-2xl text-lg text-black'>The Series L2 bottle sends gentle vibration reminders to keep you drinking throughout the day.</p>
 
                         </div>
 
@@ -226,28 +204,28 @@ const SeriesL2 = () => {
 
                     <div className='flex flex-col w-full h-full flex-shrink-0 items-center justify-center bottle-information-2 lg:pr-10 lg:pl-0 pr-6 pl-6'>
 
-                        <div className='flex flex-col gap-2 w-8/12'>
+                        <div className='flex flex-col gap-2 lg:w-8/12 w-full'>
 
-                            <h3 className='lg:text-2xl md:text-lg text-base text-black font-semibold'>Built for comfort and durability, the Series L2 is made from Tritan™, <span className='lg:text-2xl md:text-lg text-base text-black font-[400]'> offering a sleek, ergonomic design that feels natural to carry wherever you go.</span></h3>
+                            <h3 className='lg:text-2xl text-lg text-black font-semibold'>Built for comfort and durability, the Series L2 is made from Tritan™, <span className='lg:text-2xl text-lg text-black font-[400]'> offering a sleek, ergonomic design that feels natural to carry wherever you go.</span></h3>
 
                         </div>
                     </div>
 
                     <div className='flex flex-col w-full h-full flex-shrink-0 items-center justify-center bottle-information-3 lg:pr-10 lg:pl-0 pr-6 pl-6'>
 
-                        <div className='flex flex-col gap-2 w-8/12'>
+                        <div className='flex flex-col gap-2 lg:w-8/12 w-full'>
 
-                            <h3 className='lg:text-2xl md:text-lg text-base text-black font-semibold'>Get essential information at a glance. </h3>
-                            <p className='lg:text-2xl md:text-lg text-base text-black'>The dot matrix display shows the time, your daily water intake percentage, and fun animations, making hydration more engaging.</p>
+                            <h3 className='lg:text-2xl text-lg text-black font-semibold'>Get essential information at a glance. </h3>
+                            <p className='lg:text-2xl text-lg text-black'>The dot matrix display shows the time, your daily water intake percentage, and fun animations, making hydration more engaging.</p>
 
                         </div>
                     </div>
 
                     <div className='flex flex-col w-full h-full flex-shrink-0 items-center justify-center bottle-information-4 lg:pr-10 lg:pl-0 pr-6 pl-6'>
-                        <div className='flex flex-col gap-2 w-8/12'>
+                        <div className='flex flex-col gap-2 lg:w-8/12 w-full'>
 
-                            <h3 className='lg:text-2xl md:text-lg text-base text-black font-semibold'>Personalised Animations and Graffiti.</h3>
-                            <p className='lg:text-2xl md:text-lg text-base text-black'>Make your bottle your own with animations and graffiti displayed on the screen.</p>
+                            <h3 className='lg:text-2xl text-lg text-black font-semibold'>Personalised Animations and Graffiti.</h3>
+                            <p className='lg:text-2xl text-lg text-black'>Make your bottle your own with animations and graffiti displayed on the screen.</p>
 
                         </div>
                     </div>
@@ -261,24 +239,23 @@ const SeriesL2 = () => {
             <div className='w-full h-screen flex-shrink-0' />
             <div className='w-full h-screen flex-shrink-0' />
             <div className='w-full h-screen flex-shrink-0' />
-
             {/* pin spacer do not delete */}
 
-            <div className='w-full flex flex-row text-center bg-black text-white h-screen flex-shrink-0 py-10 lwl8-app-section'>
+            <div className='w-full flex flex-col lg:flex-row text-center bg-black text-white h-screen flex-shrink-0 py-10 lwl8-app-section'>
 
-                <div className='flex flex-col lg:p-10 p-6 items-center justify-center lg:w-6/12'>
+                <div className='lg:flex hidden flex-col lg:p-10 p-6 items-center justify-center lg:w-6/12'>
 
-                    <img src="/series-l2/mobile_app.png" alt="lwl8-app" className='w-full h-full object-contain lwl8-app' />
+                    <img src="/series-l2/mobile_app.png" alt="lwl8-app" className='w-full h-1/2 lg:h-full object-contain' />
 
                 </div>
 
                 <div className='flex flex-col text-center lg:gap-6 gap-4 lg:p-10 p-6 items-center justify-center lg:w-6/12'>
-                    <div className='flex flex-col gap-4 w-10/12'>
+                    <div className='flex flex-col gap-4 lg:w-10/12'>
 
                         <div className='flex flex-wrap gap-1'>
                             {
                                 "Connect to the LWL8 app for a personalized hydration experience.".split(' ').map(item => (
-                                    <h3 className='lg:text-2xl md:text-lg text-base text-white text-start font-medium opacity-10 app-text'>{item}</h3>
+                                    <h3 className='lg:text-2xl text-lg text-white text-start font-medium opacity-40 app-text'>{item}</h3>
                                 ))
                             }
                         </div>
@@ -286,14 +263,23 @@ const SeriesL2 = () => {
                         <div className='flex flex-wrap gap-1'>
                             {
                                 "Track, monitor, and achieve your goals with smart insights synced directly to your device.".split(' ').map(item => (
-                                    <h3 className='lg:text-2xl md:text-lg text-base text-white text-start opacity-10 app-text'>{item}</h3>
+                                    <h3 className='lg:text-2xl text-lg text-white text-start opacity-40 app-text'>{item}</h3>
                                 ))
                             }
                         </div>
 
+                        <img src="/series-l2/mobile_app.png" alt="lwl8-app" className='w-full h-1/2 lg:h-full object-contain lg:hidden block' />
+
+
                     </div>
                 </div>
             </div>
+
+            {/* pin spacer do not delete */}
+            <div className='w-full h-screen flex-shrink-0' />
+            {/* pin spacer do not delete */}
+
+
 
             <div className='w-full flex flex-col lg:p-10 p-6 text-center'>
 
@@ -306,11 +292,11 @@ const SeriesL2 = () => {
             </div>
 
             <div className='flex flex-col w-full h-screen lifestyle-container flex-shrink-0'>
-                <div className='flex flex-row items-start w-[200vw] flex-shrink-0 justify-start h-screen'>
+                <div className='flex flex-row items-center w-[200vw] flex-shrink-0 justify-start h-screen'>
 
                     {
                         React.Children.toArray(["/series-l2/workout.jpeg", "/series-l2/hiker.jpeg"].map((item, index) => (
-                            <div className='w-[100vw] flex-shrink-0 h-screen py-14 last:pr-10 first:pl-10 pr-10'>
+                            <div className='w-[100vw] flex-shrink-0 h-[550px] lg:h-screen py-14 lg:last:pr-10 last:pr-6 lg:first:pl-10 first:pl-6 lg:pr-10 pr-6'>
                                 <div className='flex flex-col w-full h-full relative rounded-2xl overflow-hidden first:ml-auto'>
 
                                     <img src={item} alt="placeholder-image" className='w-full h-full object-cover ' />
@@ -330,7 +316,7 @@ const SeriesL2 = () => {
 
                 <div className='flex flex-col text-center lg:gap-6 gap-4'>
 
-                    <h2 className='lg:text-5xl/snug font-bold lg:w-6/12 mx-auto'>Sync, Connect and Drink Water Smarter with LWL8</h2>
+                    <h2 className='lg:text-5xl/snug text-2xl font-bold lg:w-6/12 mx-auto'>Sync, Connect and Drink Water Smarter with LWL8</h2>
                     <p className='section-sub-text lg:w-5/12 mx-auto'>Step-by-step guide to syncing, utilising lights, and Bluetooth functionality.</p>
 
                     <button className='lg:text-lg w-fit mx-auto md:text-base text-sm font-medium hover:underline'>See how it works</button>

@@ -1,13 +1,13 @@
 /* eslint-disable */
-import { Canvas, useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
-import React, { useEffect, useRef, useState } from 'react';
+import { Canvas, useFrame } from '@react-three/fiber';
 import WaterBottle from '../../Assets/water_bottle.glb';
+import React, { useEffect, useRef, useState } from 'react';
 
-import gsap from 'gsap/dist/gsap'
+import { Vector3 } from 'three';
+import gsap from 'gsap/dist/gsap';
 import ScrollTrigger from 'gsap/dist/ScrollTrigger';
 import ScrollToPlugin from 'gsap/dist/ScrollToPlugin';
-import { Vector3 } from 'three';
 
 
 function generateXValues(n, max = 4, step = 0.08) {
