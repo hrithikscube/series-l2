@@ -27,8 +27,6 @@ function generateXValues(n, max = 4, step = 0.08) {
 
 let xValues = generateXValues(120);
 
-console.log(xValues, 'xValues')
-
 const Model = ({ modelPath, rotation, position }) => {
     const groupRef = useRef();
     const { scene } = useGLTF(modelPath);
