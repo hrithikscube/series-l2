@@ -31,11 +31,13 @@ const Landing = () => {
                     trigger: '.water-logo-animate',
                 },
                 onComplete: () => {
-                    setEnableScroll(true)
                     gsap.to('.hydration-made-smarter', {
                         opacity: 1,
                         duration: 1,
-                        ease: 'none'
+                        ease: 'none',
+                        onComplete: () => {
+                            setEnableScroll(true)
+                        }
                     })
                 }
             })
@@ -51,9 +53,12 @@ const Landing = () => {
     return (
         <div className={`flex flex-col lg:w-10/12 w-11/12 mx-auto relative ${enableScroll ? '' : 'h-screen overflow-hidden'}`}>
 
-            <div className='flex flex-col w-full items-center justify-start h-screen absolute top-0 left-0 lg:py-20 py-10 water-logo-animate'>
-                <img src="/series-l2/water_logo.svg" alt="water_logo" className='w-96 h-40 mx-auto' />
-            </div>
+            {
+                !enableScroll &&
+                <div className='flex flex-col w-full items-center justify-start h-screen absolute top-0 left-0 lg:py-20 py-10 water-logo-animate'>
+                    <img src="/series-l2/water_logo.svg" alt="water_logo" className='w-96 h-40 mx-auto' />
+                </div>
+            }
 
             <div className='w-full mx-auto flex flex-col lg:py-20 py-10 hydration-made-smarter opacity-0'>
 
