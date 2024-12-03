@@ -115,6 +115,7 @@ const SeriesL2 = () => {
             }
         })
 
+
         gsap.to('.app-text', {
             opacity: 100,
             ease: 'none',
@@ -127,6 +128,7 @@ const SeriesL2 = () => {
                 scrub: 1
             }
         })
+
 
         return () => ctx.revert()
 
@@ -270,7 +272,7 @@ const SeriesL2 = () => {
 
                 </div>
 
-                <div className='flex flex-col text-center lg:gap-6 gap-4  lg:p-10 p-6 items-center justify-center lg:w-6/12'>
+                <div className='flex flex-col text-center lg:gap-6 gap-4 lg:p-10 p-6 items-center justify-center lg:w-6/12'>
                     <div className='flex flex-col gap-4 w-10/12'>
 
                         <div className='flex flex-wrap gap-1'>

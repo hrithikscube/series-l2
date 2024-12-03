@@ -101,7 +101,7 @@ const Test = () => {
                     endTrigger: '.section-4',
                     end: 'bottom bottom',
                     pinSpacing: false,
-                    markers: true,
+                    // markers: true,
                     onUpdate: (self) => {
                         setRotation({
                             ...rotation,
@@ -110,12 +110,6 @@ const Test = () => {
                             z: 10 * self.progress,
                         })
 
-                        // console.log(Math.round(100 * self.progress))
-                        // setPosition({
-                        //     ...position,
-                        //     x: xValues[Math.round(100 * self.progress)]
-                        // })
-
                         const progressIndex = Math.round(self.progress * (xValues.length - 1));
                         setPosition({
                             ...position,
@@ -123,6 +117,20 @@ const Test = () => {
                             x: -xValues[progressIndex]
                         });
                     }
+                }
+            })
+
+            gsap.to('.para-text', {
+                opacity: 100,
+                ease: 'power1.inOut',
+                stagger: 0.2,
+                scrollTrigger: {
+                    start: 'top top',
+                    pin: '.para-container',
+                    end: '200% bottom',
+                    markers: true,
+                    pinSpacing: true,
+                    scrub: 2
                 }
             })
 
@@ -160,7 +168,27 @@ const Test = () => {
 
             <div className='section-4 flex flex-col items-center justify-center w-full h-screen bg-blue-600 text-[5rem] font-medium text-[#121212]/90'>
 
-                Section 4
+                Section 11
+
+            </div>
+
+
+            <div className='flex flex-col w-full h-screen items-center justify-center para-container'>
+
+                <div className='lg:w-7/12 mx-auto flex flex-wrap gap-2'>
+                    {
+                        "Do eiusmod veniam culpa pariatur Lorem ut dolor ullamco voluptate anim eu quis nostrud est. Sint aute nisi aliquip pariatur ad cillum minim. In tempor veniam fugiat voluptate esse enim nulla id nisi dolore id irure. Consectetur enim voluptate non culpa nulla esse mollit quis cupidatat proident. Ipsum ipsum enim esse culpa voluptate esse Lorem et cillum anim occaecat.".split(' ').map(item => (
+                            <p className='lg:text-xl text-base font-medium text-[#121212] opacity-50 para-text'>{item}</p>
+                        ))
+                    }
+                </div>
+
+            </div>
+
+
+            <div className='section-4 flex flex-col items-center justify-center w-full h-screen bg-green-200 text-[5rem] font-medium text-[#121212]/90'>
+
+                Section 12
 
             </div>
 
