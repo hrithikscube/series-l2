@@ -142,7 +142,7 @@ const SeriesL2 = () => {
 
                 <div className='w-full h-44 relative overflow-x-hidden'>
                     <div>
-                        <img src="dot-matrix.svg" alt="dot-matrix" className='w-full h-full object-cover' />
+                        <img src="/series-l2/dot-matrix.svg" alt="dot-matrix" className='w-full h-full object-cover' />
                     </div>
 
                     <div className='w-full h-full absolute top-0 left-0 flex items-center justify-center dot-matrix-text opacity-0'>
@@ -160,7 +160,7 @@ const SeriesL2 = () => {
 
                 <div className='w-full h-full absolute top-0 left-0 z-10'>
 
-                    <img src="hero-background.jpeg" alt="hero_background" className='w-full h-full object-cover opacity-30' />
+                    <img src="/series-l2/hero-background.jpeg" alt="hero_background" className='w-full h-full object-cover opacity-30' />
 
                 </div>
 
@@ -266,7 +266,7 @@ const SeriesL2 = () => {
 
                 <div className='flex flex-col lg:p-10 p-6 items-center justify-center lg:w-6/12'>
 
-                    <img src="/mobile_app.png" alt="lwl8-app" className='w-full h-full object-contain lwl8-app' />
+                    <img src="/series-l2/mobile_app.png" alt="lwl8-app" className='w-full h-full object-contain lwl8-app' />
 
                 </div>
 
@@ -307,7 +307,7 @@ const SeriesL2 = () => {
                 <div className='flex flex-row items-start w-[200vw] flex-shrink-0 justify-start h-screen'>
 
                     {
-                        React.Children.toArray(["workout.jpeg", "hiker.jpeg"].map((item, index) => (
+                        React.Children.toArray(["/series-l2/workout.jpeg", "/series-l2/hiker.jpeg"].map((item, index) => (
                             <div className='w-[100vw] flex-shrink-0 h-screen py-14 last:pr-10 first:pl-10 pr-10'>
                                 <div className='flex flex-col w-full h-full relative rounded-2xl overflow-hidden first:ml-auto'>
 

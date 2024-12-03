@@ -1,112 +1,93 @@
-// import { gsap } from 'gsap';
-// import { ScrollTrigger } from 'gsap/ScrollTrigger';
-// import { Canvas } from '@react-three/fiber';
-// import React, { useEffect, useRef, useState } from 'react';
-// import { OrbitControls, useGLTF } from '@react-three/drei';
-// import WaterBottleFlask from '../../Assets/water_bottleflask.glb';
+import { Canvas } from '@react-three/fiber';
+import { useGLTF } from '@react-three/drei';
+import React, { useEffect, useRef } from 'react';
+import WaterBottle from '../../Assets/water_bottle.glb';
 
-// gsap.registerPlugin(ScrollTrigger);
+import gsap from 'gsap/dist/gsap'
+import ScrollTrigger from 'gsap/dist/ScrollTrigger';
+import ScrollToPlugin from 'gsap/dist/ScrollToPlugin';
 
-// const GLTFViewer = ({ modelPath, rotation }) => {
-//     const modelRef = useRef();
+const Model = ({ modelPath }) => {
+    const groupRef = useRef();
+    const { scene } = useGLTF(modelPath);
 
-//     useEffect(() => {
-//         if (modelRef.current) {
-//             gsap.to(modelRef.current.rotation, {
-//                 x: rotation.x,
-//                 y: rotation.y,
-//                 z: rotation.z,
-//                 duration: 0.5,
-//                 ease: 'power2.out',
-//             });
-//         }
-//     }, [rotation]);
+    return <primitive ref={groupRef} object={scene} scale={[1, 1, 1]} position={[0, -1, 0]} />;
+}
 
-//     const Model = () => {
-//         const { scene } = useGLTF(modelPath);
+const Lights = () => {
+    const directionalLightRef = useRef()
 
-//         // Scale the model to fit inside the screen (adjust scale factor as needed)
-//         scene.scale.set(0.5, 0.5, 0.5); // Adjust scale based on your model's size
-
-//         return <primitive ref={modelRef} object={scene} />;
-//     };
-
-//     return (
-//         <Canvas>
-//             <ambientLight intensity={0.5} />
-//             <directionalLight position={[5, 5, 5]} />
-//             <OrbitControls enableZoom={false} />
-//             <Model />
-//         </Canvas>
-//     );
-// };
-
-// const Test = () => {
-//     const [rotation, setRotation] = useState({ x: 0, y: 0, z: 0 });
-//     const modelContainerRef = useRef();
-
-//     useEffect(() => {
-//         const handleScroll = () => {
-//             const scrollY = window.scrollY || window.pageYOffset;
-//             const mappedRotationY = scrollY * 0.005; // Adjust multiplier for intensity
-//             setRotation({ x: 0, y: mappedRotationY, z: 0 });
-//         };
-
-//         window.addEventListener('scroll', handleScroll);
-//         return () => window.removeEventListener('scroll', handleScroll);
-//     }, []);
-
-//     useEffect(() => {
-//         let ctx = gsap.context(() => {
-//             if (modelContainerRef.current) {
-//                 gsap.fromTo(
-//                     modelContainerRef.current,
-//                     { position: 'absolute', top: '0' },
-//                     {
-//                         scrollTrigger: {
-//                             trigger: modelContainerRef.current,
-//                             start: 'top top',
-//                             end: '200%',
-//                             pin: true, // Pin the model during scrolling
-//                             scrub: true,
-//                             markers: false, // Remove markers for better visual experience
-//                         },
-//                     }
-//                 );
-//             }
-//         })
-
-//         return () => ctx.revert()
-//     }, []);
-
-//     return (
-//         <div className='w-full'>
-//             {/* Pinning and centering the model */}
-//             <div ref={modelContainerRef} className="flex items-center justify-center w-full h-screen">
-//                 <GLTFViewer modelPath={WaterBottleFlask} rotation={rotation} />
-//             </div>
-
-//             {/* Additional sections */}
-//             <section className="h-screen w-full bg-gray-200">
-//                 <h2>Section 1</h2>
-//                 <p>Content for the first section underneath the model.</p>
-//             </section>
-//             <section className="h-screen w-full bg-gray-300">
-//                 <h2>Section 2</h2>
-//                 <p>Content for the second section underneath the model.</p>
-//             </section>
-//         </div>
-//     );
-// };
-
-// export default Test;
-
-
-import React from 'react'
+    return (
+        <>
+            <ambientLight intensity={0.5} />
+            <hemisphereLight intensity={0.6} />
+            <directionalLight
+                ref={directionalLightRef}
+                position={[5, 10, 7.5]}
+                castShadow
+                shadow-mapSize={[1024, 1024]}
+                intensity={1}
+            />
+        </>
+    )
+}
 
 const Test = () => {
+
+    useEffect(() => {
+
+        gsap.registerPlugin(ScrollToPlugin, ScrollTrigger)
+
+        let ctx = gsap.context(() => {
+
+            gsap.to('.water-bottle-section', {
+                scrollTrigger: {
+                    trigger: '.water-bottle-section',
+                    start: 'top top',
+                    pin: true,
+                    endTrigger: '.section-4',
+                    end: 'bottom bottom',
+                    pinSpacing: false,
+                    markers: true,
+                }
+            })
+
+        })
+
+        return () => ctx.revert()
+
+    }, [])
+
     return (
-        <div>Test</div>
+        <div>
+            <div className='flex flex-col items-center justify-center w-full h-screen water-bottle-section'>
+                <Canvas shadows camera={{ position: [0, 3.5, 6], fov: 50 }}>
+                    <Model modelPath={WaterBottle} />
+                    <Lights />
+                    {/* <OrbitControls /> */}
+                </Canvas>
+            </div>
+
+            <div className='section-2 flex flex-col items-center justify-center w-full h-screen bg-blue-200 text-[5rem] font-medium text-[#121212]/90'>
+
+                Section 2
+
+            </div>
+
+            <div className='section-3 flex flex-col items-center justify-center w-full h-screen bg-blue-400 text-[5rem] font-medium text-[#121212]/90'>
+
+                Section 3
+
+            </div>
+
+            <div className='section-4 flex flex-col items-center justify-center w-full h-screen bg-blue-600 text-[5rem] font-medium text-[#121212]/90'>
+
+                Section 4
+
+            </div>
+
+
+        </div>
     )
 }
 

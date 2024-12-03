@@ -11,7 +11,7 @@ const Landing = () => {
             <div className='w-full mx-auto flex flex-col lg:py-20 py-10'>
 
 
-                <img src="water_logo.svg" alt="water_logo" className='w-96 h-40 mx-auto' />
+                <img src="/series-l2/water_logo.svg" alt="water_logo" className='w-96 h-40 mx-auto' />
 
 
                 <div className='flex flex-col lg:gap-6 gap-4 text-center lg:mt-6 mt-4'>
@@ -120,13 +120,13 @@ const Landing = () => {
                 <button className='w-32 grid grid-cols-3 items-center rounded-full bg-[#E0E0E0] p-3 '>
 
                     <div className='flex items-center justify-center'>
-                        <img src="slider-arrow.svg" alt="slider-arrow" className='w-5 h-5' />
+                        <img src="/series-l2/slider-arrow.svg" alt="slider-arrow" className='w-5 h-5' />
                     </div>
 
                     <p className='flex items-center justify-center'>1/5</p>
 
                     <div className='flex items-center justify-center'>
-                        <img src="slider-arrow.svg" alt="slider-arrow" className='w-5 h-5 -rotate-180' />
+                        <img src="/series-l2/slider-arrow.svg" alt="slider-arrow" className='w-5 h-5 -rotate-180' />
                     </div>
 
                 </button>
@@ -159,13 +159,13 @@ const Landing = () => {
                 <button className='w-32 grid grid-cols-3 items-center rounded-full bg-[#E0E0E0] p-3 '>
 
                     <div className='flex items-center justify-center'>
-                        <img src="slider-arrow.svg" alt="slider-arrow" className='w-5 h-5' />
+                        <img src="/series-l2/slider-arrow.svg" alt="slider-arrow" className='w-5 h-5' />
                     </div>
 
                     <p className='flex items-center justify-center'>1/5</p>
 
                     <div className='flex items-center justify-center'>
-                        <img src="slider-arrow.svg" alt="slider-arrow" className='w-5 h-5 -rotate-180' />
+                        <img src="/series-l2/slider-arrow.svg" alt="slider-arrow" className='w-5 h-5 -rotate-180' />
                     </div>
 
                 </button>
@@ -223,7 +223,7 @@ const Landing = () => {
                         <div className='w-8/12 mx-auto flex flex-row flex-shrink-0 bg-[#f2f2f2] h-96 rounded-3xl overflow-x-hidden'>
 
                             <div className='w-1/2 flex-shrink-0 h-full'>
-                                <img src="/hiker.jpeg" alt="hiker" className='w-full h-full object-cover' />
+                                <img src="/series-l2/hiker.jpeg" alt="hiker" className='w-full h-full object-cover' />
                             </div>
 
                             <div className='w-1/2 flex-shrink-0 h-full lg:p-8 p-4 flex flex-col lg:gap-4 gap-2 overflow-y-auto'>
@@ -247,13 +247,13 @@ const Landing = () => {
                 <button className='w-32 grid grid-cols-3 items-center mx-auto rounded-full bg-[#E0E0E0] p-3 '>
 
                     <div className='flex items-center justify-center'>
-                        <img src="slider-arrow.svg" alt="slider-arrow" className='w-5 h-5' />
+                        <img src="/series-l2/slider-arrow.svg" alt="slider-arrow" className='w-5 h-5' />
                     </div>
 
                     <p className='flex items-center justify-center'>1/5</p>
 
                     <div className='flex items-center justify-center'>
-                        <img src="slider-arrow.svg" alt="slider-arrow" className='w-5 h-5 -rotate-180' />
+                        <img src="/series-l2/slider-arrow.svg" alt="slider-arrow" className='w-5 h-5 -rotate-180' />
                     </div>
 
                 </button>
