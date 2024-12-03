@@ -1,4 +1,4 @@
-import { Canvas } from '@react-three/fiber';
+import { Canvas, useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 import React, { useEffect, useRef, useState } from 'react';
 import WaterBottle from '../../Assets/water_bottle.glb';
@@ -6,26 +6,57 @@ import WaterBottle from '../../Assets/water_bottle.glb';
 import gsap from 'gsap/dist/gsap'
 import ScrollTrigger from 'gsap/dist/ScrollTrigger';
 import ScrollToPlugin from 'gsap/dist/ScrollToPlugin';
+import { Vector3 } from 'three';
+
+
+function generateXValues(n, max = 4, step = 0.08) {
+    const range = Math.floor(max / step); // Number of steps in one phase
+    const result = [];
+    for (let i = 0; i < n; i++) {
+        const phase = Math.floor(i / range) % 4;
+        const position = (i % range) * step; // Incremental step
+
+        if (phase === 0) result.push(+position.toFixed(1)); // 0 to max
+        else if (phase === 1) result.push(+(max - position).toFixed(1)); // max to 0
+        else if (phase === 2) result.push(-position.toFixed(1)); // 0 to -max
+        else result.push(-(max - position).toFixed(1)); // -max to 0
+    }
+    return result;
+}
+
+let xValues = generateXValues(120);
+
+console.log(xValues, 'xValues')
 
 const Model = ({ modelPath, rotation, position }) => {
     const groupRef = useRef();
     const { scene } = useGLTF(modelPath);
 
+    // Store the target position and a smooth position
+    const targetPosition = useRef(new Vector3(0, -1, 0));
+    const smoothPosition = useRef(new Vector3(0, -1, 0));
+
     useEffect(() => {
-        if (groupRef.current && typeof rotation !== 'undefined') {
+        if (position) {
+            targetPosition.current.set(position.x, position.y, position.z);
+        }
+    }, [position]);
+
+    useEffect(() => {
+        if (rotation && groupRef.current) {
             groupRef.current.rotation.set(rotation.x, rotation.y, rotation.z);
         }
     }, [rotation]);
 
-    useEffect(() => {
-        if (groupRef.current && typeof position !== 'undefined') {
-            groupRef.current.position.set(position.x, position.y, position.z);
+    useFrame(() => {
+        if (groupRef.current) {
+            smoothPosition.current.lerp(targetPosition.current, 0.1); // Smooth interpolation
+            groupRef.current.position.copy(smoothPosition.current);
         }
-    }, [position]);
+    });
 
-
-    return <primitive ref={groupRef} object={scene} scale={[1, 1, 1]} position={[0, -1, 0]} />;
-}
+    return <primitive ref={groupRef} object={scene} scale={[1.1, 1.1, 1.1]} />;
+};
 
 const Lights = () => {
     const directionalLightRef = useRef()
@@ -75,7 +106,21 @@ const Test = () => {
                             ...rotation,
                             x: 10 * self.progress,
                             y: 10 * self.progress,
+                            z: 10 * self.progress,
                         })
+
+                        // console.log(Math.round(100 * self.progress))
+                        // setPosition({
+                        //     ...position,
+                        //     x: xValues[Math.round(100 * self.progress)]
+                        // })
+
+                        const progressIndex = Math.round(self.progress * (xValues.length - 1));
+                        setPosition({
+                            ...position,
+                            // x: xValues[progressIndex],s
+                            x: -xValues[progressIndex]
+                        });
                     }
                 }
             })
@@ -102,11 +147,15 @@ const Test = () => {
 
             </div>
 
-            <div className='section-3 flex flex-col items-center justify-center w-full h-screen bg-blue-400 text-[5rem] font-medium text-[#121212]/90'>
+            {
+                React.Children.toArray([...Array(10)].map((item, index) => (
+                    <div className='section-3 flex flex-col items-center justify-center w-full h-screen bg-blue-400 text-[5rem] font-medium text-[#121212]/90'>
 
-                Section 3
+                        Section {3 + index}
 
-            </div>
+                    </div>
+                )))
+            }
 
             <div className='section-4 flex flex-col items-center justify-center w-full h-screen bg-blue-600 text-[5rem] font-medium text-[#121212]/90'>
 
