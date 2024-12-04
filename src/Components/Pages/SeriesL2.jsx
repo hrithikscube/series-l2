@@ -54,7 +54,9 @@ const SeriesL2 = () => {
                     onUpdate: (self) => {
                         setRotation({
                             ...rotation,
-                            y: 10 * self.progress
+                            y: 10 * self.progress,
+                            x: 10 * self.progress
+
                         })
                     }
                 }
