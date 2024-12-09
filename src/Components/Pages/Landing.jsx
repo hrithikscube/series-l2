@@ -1,6 +1,6 @@
 import gsap from 'gsap/dist/gsap';
 import { useNavigate } from 'react-router-dom';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ScrollTrigger from 'gsap/dist/ScrollTrigger';
 import ScrollToPlugin from 'gsap/dist/ScrollToPlugin';
 
@@ -49,6 +49,30 @@ const Landing = () => {
     }, [])
 
     const [enableScroll, setEnableScroll] = useState(false)
+
+    const highlightRef = useRef()
+    const benefitRef = useRef()
+    const storyRef = useRef()
+
+
+    const scroll = (ref, direction, percentage) => {
+        if (ref.current) {
+            const scrollAmount = ref.current.offsetWidth * percentage;
+            ref.current.scrollBy({
+                left: direction === 'left' ? -scrollAmount : scrollAmount,
+                behavior: 'smooth',
+            });
+        }
+    };
+
+    const scrollHighlightItemLeft = () => scroll(highlightRef, 'left', 1);
+    const scrollHighlightItemRight = () => scroll(highlightRef, 'right', 1);
+
+    const scrollBenefitItemLeft = () => scroll(benefitRef, 'left', 1);
+    const scrollBenefitItemRight = () => scroll(benefitRef, 'right', 1);
+
+    const scrollStoryItemLeft = () => scroll(storyRef, 'left', 0.66);
+    const scrollStoryItemRight = () => scroll(storyRef, 'right', 0.66);
 
     return (
         <div className={`flex flex-col lg:w-10/12 w-11/12 mx-auto relative ${enableScroll ? '' : 'h-screen overflow-hidden'}`}>
@@ -165,7 +189,7 @@ const Landing = () => {
 
             </div>
 
-            <div className='flex flex-row items-start w-full justify-start overflow-x-scroll snap-x snap-mandatory lg:gap-10 gap-6'>
+            <div ref={highlightRef} className='flex flex-row items-start w-full justify-start overflow-x-scroll snap-x snap-mandatory lg:gap-10 gap-6'>
 
                 {
                     [1, 2, 3].map(item => (
@@ -184,15 +208,15 @@ const Landing = () => {
             </div>
 
             <div className='pt-10 flex items-center justify-end'>
-                <button className='w-32 grid grid-cols-3 items-center rounded-full bg-[#E0E0E0] p-3 '>
+                <button className='w-32 grid grid-cols-2 items-center rounded-full bg-[#E0E0E0] p-3 '>
 
-                    <div className='flex items-center justify-center'>
+                    <div onClick={scrollHighlightItemLeft} className='flex items-center justify-center'>
                         <img src="/series-l2/slider-arrow.svg" alt="slider-arrow" className='w-5 h-5' />
                     </div>
 
-                    <p className='flex items-center justify-center lg:text-sm text-sm'>1/5</p>
+                    {/* <p className='flex items-center justify-center lg:text-sm text-sm'>1/3</p> */}
 
-                    <div className='flex items-center justify-center'>
+                    <div onClick={scrollHighlightItemRight} className='flex items-center justify-center'>
                         <img src="/series-l2/slider-arrow.svg" alt="slider-arrow" className='w-5 h-5 -rotate-180' />
                     </div>
 
@@ -209,7 +233,7 @@ const Landing = () => {
 
             </div>
 
-            <div className='flex flex-row items-start w-full justify-start overflow-x-scroll snap-x snap-mandatory lg:gap-10 gap-6'>
+            <div ref={benefitRef} className='flex flex-row items-start w-full justify-start overflow-x-scroll snap-x snap-mandatory lg:gap-10 gap-6'>
 
                 {
                     [1, 2, 3].map((item, index) => (
@@ -222,15 +246,15 @@ const Landing = () => {
             </div>
 
             <div className='flex items-center justify-end -mt-20 lg:pr-10 pr-6'>
-                <button className='w-32 grid grid-cols-3 items-center rounded-full bg-[#E0E0E0] p-3 '>
+                <button className='w-32 grid grid-cols-2 items-center rounded-full bg-[#E0E0E0] p-3 '>
 
-                    <div className='flex items-center justify-center'>
+                    <div onClick={scrollBenefitItemLeft} className='flex items-center justify-center'>
                         <img src="/series-l2/slider-arrow.svg" alt="slider-arrow" className='w-5 h-5' />
                     </div>
 
-                    <p className='flex items-center justify-center lg:text-sm text-sm'>1/5</p>
+                    {/* <p className='flex items-center justify-center lg:text-sm text-sm'>1/5</p> */}
 
-                    <div className='flex items-center justify-center'>
+                    <div onClick={scrollBenefitItemRight} className='flex items-center justify-center'>
                         <img src="/series-l2/slider-arrow.svg" alt="slider-arrow" className='w-5 h-5 -rotate-180' />
                     </div>
 
@@ -280,7 +304,7 @@ const Landing = () => {
 
             </div>
 
-            <div className='flex items-center justify-start lg:gap-10 gap-8 w-full mx-auto pb-10 snap-x snap-mandatory overflow-x-auto'>
+            <div ref={storyRef} className='flex items-center justify-start lg:gap-10 gap-8 w-full mx-auto pb-10 snap-x snap-mandatory overflow-x-auto'>
 
                 {
                     [...Array(5)].map(item => (
@@ -306,15 +330,15 @@ const Landing = () => {
             </div>
 
             <div className='flex items-center justify-center w-full pb-10'>
-                <button className='w-32 grid grid-cols-3 items-center mx-auto rounded-full bg-[#E0E0E0] p-3 '>
+                <button className='w-32 grid grid-cols-2 items-center mx-auto rounded-full bg-[#E0E0E0] p-3 '>
 
-                    <div className='flex items-center justify-center'>
+                    <div onClick={scrollStoryItemLeft} className='flex items-center justify-center'>
                         <img src="/series-l2/slider-arrow.svg" alt="slider-arrow" className='w-5 h-5' />
                     </div>
 
-                    <p className='flex items-center justify-center lg:text-sm text-sm'>1/5</p>
+                    {/* <p className='flex items-center justify-center lg:text-sm text-sm'>1/5</p> */}
 
-                    <div className='flex items-center justify-center'>
+                    <div onClick={scrollStoryItemRight} className='flex items-center justify-center'>
                         <img src="/series-l2/slider-arrow.svg" alt="slider-arrow" className='w-5 h-5 -rotate-180' />
                     </div>
 

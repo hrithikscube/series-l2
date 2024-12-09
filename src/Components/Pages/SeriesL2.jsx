@@ -54,8 +54,8 @@ const SeriesL2 = () => {
                     onUpdate: (self) => {
                         setRotation({
                             ...rotation,
-                            y: 10 * self.progress,
-                            x: 10 * self.progress
+                            y: 5 * self.progress,
+                            // x: 10 * self.progress
 
                         })
                     }
@@ -175,7 +175,7 @@ const SeriesL2 = () => {
 
             <div className='flex flex-row w-full h-screen intro-section'>
 
-                <div className="lg:w-6/12 w-full h-full flex flex-col items-center justify-center pin-this-bottle lg:p-10 p-6">
+                <div className="lg:w-6/12 w-full h-full flex flex-col items-center justify-center pin-this-bottle lg:p-0 p-6">
 
                     <div className='w-full h-full flex-shrink-0'>
                         <GLTF noControls rotation={rotation} modelPath={WaterBottle} />
@@ -243,15 +243,15 @@ const SeriesL2 = () => {
             <div className='w-full h-screen flex-shrink-0' />
             {/* pin spacer do not delete */}
 
-            <div className='w-full flex flex-col lg:flex-row text-center bg-black text-white h-screen flex-shrink-0 py-10 lwl8-app-section'>
+            <div className='w-full flex flex-col lg:flex-row text-center bg-black text-white h-screen flex-shrink-0 py-10 lwl8-app-section relative'>
 
-                <div className='lg:flex hidden flex-col lg:p-10 p-6 items-center justify-center lg:w-6/12'>
+                <div className='lg:flex hidden flex-col lg:p-10 p-6 items-center justify-center lg:w-6/12 z-20'>
 
                     <img src="/series-l2/mobile_app.png" alt="lwl8-app" className='w-full h-1/2 lg:h-full object-contain' />
 
                 </div>
 
-                <div className='flex flex-col text-center lg:gap-6 gap-4 lg:p-10 p-6 items-center justify-center lg:w-6/12'>
+                <div className='flex flex-col text-center lg:gap-6 gap-4 lg:p-10 p-6 items-center justify-center lg:w-6/12 z-20'>
                     <div className='flex flex-col gap-4 lg:w-10/12'>
 
                         <div className='flex flex-wrap gap-1'>
@@ -273,6 +273,15 @@ const SeriesL2 = () => {
                         <img src="/series-l2/mobile_app.png" alt="lwl8-app" className='w-full h-1/2 lg:h-full object-contain lg:hidden block' />
 
 
+                    </div>
+                </div>
+
+                <div className='w-full h-full absolute top-0 left-0 z-10 grid lg:grid-cols-2'>
+                    <div className='flex flex-col items-end justify-start'>
+                        <img src="/series-l2/gradient-circle.svg" alt="gradient-circle" className='w-96 h-96' />
+                    </div>
+                    <div className='flex flex-col items-start justify-end'>
+                        <img src="/series-l2/gradient-circle.svg" alt="gradient-circle" className='lg:flex hidden w-96 h-96' />
                     </div>
                 </div>
             </div>
@@ -314,7 +323,7 @@ const SeriesL2 = () => {
                 </div>
             </div>
 
-            <div className='w-full flex flex-col lg:p-10 p-6 text-center h-screen items-center justify-center bg-black text-white'>
+            <div className='w-full flex flex-col lg:p-10 p-6 text-center h-screen items-center justify-center bg-gradient-to-b from-violet-300 to-stone-900 text-white'>
 
                 <div className='flex flex-col text-center lg:gap-6 gap-4'>
 
