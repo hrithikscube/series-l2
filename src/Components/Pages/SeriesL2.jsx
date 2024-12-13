@@ -7,6 +7,8 @@ import React, { useEffect, useState } from 'react';
 import ScrollTrigger from 'gsap/dist/ScrollTrigger';
 import ScrollToPlugin from 'gsap/dist/ScrollToPlugin';
 import WaterBottle from '../../Assets/water_bottle.glb';
+import SeriesL2GLB from '../../Assets/series-l2.glb';
+
 
 const SeriesL2 = () => {
 
@@ -154,8 +156,9 @@ const SeriesL2 = () => {
                         <h2 className='font-bold text-black/80 lg:text-8xl text-7xl'>Series L2</h2>
                     </div>
 
-                    <div className='lg:w-5/12 w-full mx-auto h-[550px] lifestyle-contents'>
+                    <div className='lg:w-5/12 w-full mx-auto h-[550px] lifestyle-contents flex-shrink-0'>
                         <GLTFViewer noControls parallax modelPath={WaterBottle} />
+                        {/* <GLTF noControls rotation={rotation} modelPath={SeriesL2GLB} /> */}
                     </div>
                 </div>
 
@@ -178,7 +181,7 @@ const SeriesL2 = () => {
                 <div className="lg:w-6/12 w-full h-full flex flex-col items-center justify-center pin-this-bottle lg:p-0 p-6">
 
                     <div className='w-full h-full flex-shrink-0'>
-                        <GLTF noControls rotation={rotation} modelPath={WaterBottle} />
+                        <GLTF noControls rotation={rotation} modelPath={SeriesL2GLB} />
                     </div>
 
                 </div>

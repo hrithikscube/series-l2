@@ -15,7 +15,7 @@ const Model = ({ modelPath, rotation }) => {
         }
     }, [rotation]);
 
-    return <primitive ref={groupRef} object={scene} scale={[0.7, 0.7, 0.7]} position={[0, -0.5, 0.1]} />;
+    return <primitive ref={groupRef} object={scene} scale={[0.6, 0.6, 0.6]} position={[0, -0.05, 0]} />;
 };
 
 const Lights = () => {
@@ -62,9 +62,9 @@ const CameraAnimation = ({ triggerAnimation }) => {
     return null;
 };
 
-const GLTF = ({ modelPath, noControls, rotation, triggerAnimation }) => {
+const GLTF = ({ modelPath, noControls, rotation, triggerAnimation, id }) => {
     return (
-        <Canvas shadows camera={{ position: [0, 3.5, 2.5], fov: 45 }}>
+        <Canvas id={id} shadows camera={{ position: [0, 1.5, 3], fov: 4 }}>
             <Lights />
             <Model modelPath={modelPath} rotation={rotation} />
             {!noControls && <OrbitControls enableDamping />}
