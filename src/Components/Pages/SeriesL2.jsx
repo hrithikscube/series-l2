@@ -293,8 +293,6 @@ const SeriesL2 = () => {
             <div className='w-full h-screen flex-shrink-0' />
             {/* pin spacer do not delete */}
 
-
-
             <div className='w-full flex flex-col lg:p-10 p-6 text-center'>
 
                 <div className='flex flex-col text-center lg:gap-6 gap-4'>
@@ -308,20 +306,17 @@ const SeriesL2 = () => {
             <div className='flex flex-col w-full h-screen lifestyle-container flex-shrink-0'>
                 <div className='flex flex-row items-center w-[200vw] flex-shrink-0 justify-start h-screen'>
 
-                    {
-                        React.Children.toArray(["/series-l2/workout.jpeg", "/series-l2/hiker.jpeg"].map((item, index) => (
-                            <div className='w-[100vw] flex-shrink-0 h-[550px] lg:h-screen py-14 lg:last:pr-10 last:pr-6 lg:first:pl-10 first:pl-6 lg:pr-10 pr-6'>
-                                <div className='flex flex-col w-full h-full relative rounded-2xl overflow-hidden first:ml-auto'>
+                    <div className='w-[100vw] flex-shrink-0 h-[550px] lg:h-screen py-14 '>
+                        <div className='flex flex-col w-full h-full relative rounded-2xl overflow-hidden first:ml-auto'>
+                            <img src="/series-l2/workout-shaped.png" alt="placeholder-image" className='w-full h-full object-contain ' />
+                        </div>
+                    </div>
 
-                                    <img src={item} alt="placeholder-image" className='w-full h-full object-cover ' />
-
-                                    <div className='w-full min-h-20 bg-black/40 flex flex-col items-center justify-end lg:p-10 p-4 absolute left-0 bottom-0'>
-                                        <p className='lg:text-lg md:text-base text-sm lg:leading-normal leading-loose text-white text-center lg:w-5/12 mx-auto'>The Series L1 supports your fitness goals, reminding you to refuel after every rep or run.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        )))
-                    }
+                    <div className='w-[100vw] flex-shrink-0 h-[550px] lg:h-screen py-14 '>
+                        <div className='flex flex-col w-full h-full relative rounded-2xl overflow-hidden first:ml-auto'>
+                            <img src="/series-l2/workout-shaped.png" alt="placeholder-image" className='w-full h-full object-contain -rotate-180' />
+                        </div>
+                    </div>
 
                 </div>
             </div>
