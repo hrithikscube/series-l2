@@ -5,12 +5,60 @@ import React, { useRef, useEffect } from 'react';
 import { Canvas, useThree } from '@react-three/fiber';
 import { OrbitControls, useGLTF } from '@react-three/drei';
 
-const Model = ({ modelPath, rotation }) => {
+// const Model = ({ modelPath, rotation, texturePath }) => {
+//     const groupRef = useRef();
+//     const { scene } = useGLTF(modelPath);
+
+//     useEffect(() => {
+//         if (groupRef.current && typeof rotation !== 'undefined') {
+//             groupRef.current.rotation.set(rotation.x, rotation.y, rotation.z);
+//         }
+//     }, [rotation]);
+
+//     useEffect(() => {
+//         if (texturePath) {
+//             const textureLoader = new THREE.TextureLoader();
+//             textureLoader.load(texturePath, (texture) => {
+//                 scene.traverse((child) => {
+//                     if (child.isMesh) {
+//                         child.material.map = texture;
+//                         child.material.needsUpdate = true;
+//                     }
+//                 });
+//             });
+//         }
+//     }, [texturePath, scene]);
+
+//     return <primitive ref={groupRef} object={scene} scale={[0.6, 0.6, 0.6]} position={[0, -0.05, 0]} />;
+// };
+
+const Model = ({ modelPath, texturePath, meshName, rotation }) => {
     const groupRef = useRef();
     const { scene } = useGLTF(modelPath);
+    const textureLoader = new THREE.TextureLoader();
 
     useEffect(() => {
-        if (groupRef.current && typeof rotation !== 'undefined') {
+        // Load the texture
+        const texture = textureLoader.load(texturePath, () => {
+            scene.traverse((child) => {
+                console.log(child.name, child.isMesh)
+
+                // Apply texture only to the specific mesh name
+                if (child.isMesh && child.name === meshName) {
+                    child.material.color.set(0xbef264);
+
+                    child.material.transparent = true;
+                    child.material.opacity = 0.98; // Slight opacity
+                    child.material.roughness = 2; // High roughness for a matte finish
+                    child.material.metalness = 0; // No metallic effect
+                    child.material.needsUpdate = true;
+                }
+            });
+        });
+    }, [texturePath, scene, meshName]);
+
+    useEffect(() => {
+        if (groupRef.current && rotation) {
             groupRef.current.rotation.set(rotation.x, rotation.y, rotation.z);
         }
     }, [rotation]);
@@ -18,9 +66,28 @@ const Model = ({ modelPath, rotation }) => {
     return <primitive ref={groupRef} object={scene} scale={[0.6, 0.6, 0.6]} position={[0, -0.05, 0]} />;
 };
 
+
+// const Lights = () => {
+//     const directionalLightRef = useRef();
+//     // useHelper(directionalLightRef, THREE.DirectionalLightHelper);
+
+//     return (
+//         <>
+//             <ambientLight intensity={1} />
+//             <hemisphereLight intensity={0} />
+//             <directionalLight
+//                 ref={directionalLightRef}
+//                 position={[5, 10, 7.5]}
+//                 castShadow={false}
+//                 shadow-mapSize={[1024, 1024]}
+//                 intensity={5}
+//             />
+//         </>
+//     );
+// };
+
 const Lights = () => {
-    const directionalLightRef = useRef();
-    // useHelper(directionalLightRef, THREE.DirectionalLightHelper);
+    const directionalLightRef = useRef()
 
     return (
         <>
@@ -28,15 +95,14 @@ const Lights = () => {
             <hemisphereLight intensity={0.6} />
             <directionalLight
                 ref={directionalLightRef}
-                position={[5, 10, 7.5]}
+                position={[1, 10, 10]}
                 castShadow
                 shadow-mapSize={[1024, 1024]}
                 intensity={1}
             />
         </>
-    );
-};
-
+    )
+}
 const CameraAnimation = ({ triggerAnimation }) => {
     const { camera } = useThree();
 
@@ -62,11 +128,16 @@ const CameraAnimation = ({ triggerAnimation }) => {
     return null;
 };
 
-const GLTF = ({ modelPath, noControls, rotation, triggerAnimation, id }) => {
+const GLTF = ({ modelPath, noControls, rotation, triggerAnimation, id, texturePath, meshName }) => {
     return (
-        <Canvas id={id} shadows camera={{ position: [0, 1.5, 3], fov: 4 }}>
+        <Canvas id={id} shadows
+            camera={{
+                position: [0, 1.5, 3],
+                // position: [0, 0, 0],
+                fov: 4
+            }}>
             <Lights />
-            <Model modelPath={modelPath} rotation={rotation} />
+            <Model meshName={meshName} modelPath={modelPath} rotation={rotation} texturePath={texturePath} />
             {!noControls && <OrbitControls enableDamping />}
             <CameraAnimation triggerAnimation={triggerAnimation} />
         </Canvas>

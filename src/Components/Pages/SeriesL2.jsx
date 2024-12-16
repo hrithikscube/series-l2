@@ -9,7 +9,6 @@ import ScrollToPlugin from 'gsap/dist/ScrollToPlugin';
 import WaterBottle from '../../Assets/water_bottle.glb';
 import SeriesL2GLB from '../../Assets/series-l2.glb';
 
-
 const SeriesL2 = () => {
 
     useEffect(() => {
@@ -23,8 +22,6 @@ const SeriesL2 = () => {
         y: 0,
         z: 0
     })
-
-    console.log(rotation, 'rotation')
 
     useEffect(() => {
 
@@ -181,7 +178,12 @@ const SeriesL2 = () => {
                 <div className="lg:w-6/12 w-full h-full flex flex-col items-center justify-center pin-this-bottle lg:p-0 p-6">
 
                     <div className='w-full h-full flex-shrink-0'>
-                        <GLTF noControls rotation={rotation} modelPath={SeriesL2GLB} />
+                        <GLTF
+                            meshName="Retopo_body"
+                            texturePath={"/series-l2/RETOPO_BODY.png"}
+                            noControls
+                            rotation={rotation}
+                            modelPath={SeriesL2GLB} />
                     </div>
 
                 </div>
@@ -189,7 +191,7 @@ const SeriesL2 = () => {
             </div>
 
 
-            <div className='flex lg:flex-row flex-col w-full h-screen items-end justify-end -mt-[100vh]'>
+            <div className='flex lg:flex-row flex-col w-full h-screen items-end justify-end -mt-[100vh] z-50 relative'>
 
                 <div className="lg:w-6/12 w-full h-full flex flex-col flex-shrink-0">
 
