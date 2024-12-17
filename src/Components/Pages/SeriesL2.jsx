@@ -5,9 +5,9 @@ import gsap from 'gsap/dist/gsap';
 import GLTFViewer from '../GLTFViewer';
 import React, { useEffect, useState } from 'react';
 import ScrollTrigger from 'gsap/dist/ScrollTrigger';
+import SeriesL2GLB from '../../Assets/series-l2.glb';
 import ScrollToPlugin from 'gsap/dist/ScrollToPlugin';
 import WaterBottle from '../../Assets/water_bottle.glb';
-import SeriesL2GLB from '../../Assets/series-l2.glb';
 
 const SeriesL2 = () => {
 
@@ -179,8 +179,8 @@ const SeriesL2 = () => {
 
                     <div className='w-full h-full flex-shrink-0'>
                         <GLTF
-                            meshName="Retopo_body"
-                            texturePath={"/series-l2/RETOPO_BODY.png"}
+                            meshName="body"
+                            // videoPath={"/hero-desktop.mp4"}
                             noControls
                             rotation={rotation}
                             modelPath={SeriesL2GLB} />
