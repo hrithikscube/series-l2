@@ -181,7 +181,7 @@ const SeriesL2 = () => {
                         <GLTF
                             meshName="body"
                             // videoPath={"/hero-desktop.mp4"}
-                            noControls
+                            noControls={false}
                             rotation={rotation}
                             modelPath={SeriesL2GLB} />
                     </div>

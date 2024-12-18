@@ -59,7 +59,7 @@ const Temp = () => {
         }, {
             y: 0,
             opacity: 1,
-            duration: 0.5,
+            duration: 1,
             ease: 'power1.inOut',
             stagger: 0.1
         })
@@ -106,7 +106,7 @@ const Temp = () => {
                     pin: '.live-life-section',
                     start: 'top top',
                     end: 'bottom bottom',
-                    markers: true,
+                    // markers: true,
                     scrub: 2
                 }
             })
@@ -168,7 +168,7 @@ const Temp = () => {
                             modelPath={SeriesL2}
                             meshName="body" />
                         <Environment files={PhotoStudioEnv} background={false} />
-                        {/* <OrbitControls /> */}
+                        <OrbitControls />
                     </Canvas>
                 </div>
             </div>
