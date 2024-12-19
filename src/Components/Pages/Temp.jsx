@@ -151,7 +151,9 @@ const Temp = () => {
 
             </div>
 
-            <div className="w-full mx-auto h-screen flex flex-col relative z-[20] live-life-section">
+
+
+            {/* <div className="w-full mx-auto h-screen flex flex-col relative z-[20] live-life-section">
 
                 <div className="w-full h-full absolute top-0 left-0 flex flex-col items-center justify-center">
 
@@ -172,8 +174,6 @@ const Temp = () => {
                     </Canvas>
                 </div>
             </div>
-
-
             {
                 [...Array(10)].map((item, index) => (
                     <div className={`flex flex-col w-full h-screen ${index % 2 === 0 ? 'bg-blue-200' : 'bg-red-200'} items-center justify-center text-[5rem] font-semibold text-[#121212] z-[30] relative`}>
@@ -182,7 +182,7 @@ const Temp = () => {
 
                     </div>
                 ))
-            }
+            } */}
 
 
 

@@ -1,13 +1,14 @@
 /* eslint-disable */
 
-import GLTF from '../GLTF';
+// import GLTF from '../GLTF';
+import { lazy, Suspense } from 'react';
+
+const GLTF = lazy(() => import('../GLTF'))
 import gsap from 'gsap/dist/gsap';
-import GLTFViewer from '../GLTFViewer';
 import React, { useEffect, useState } from 'react';
 import ScrollTrigger from 'gsap/dist/ScrollTrigger';
 import SeriesL2GLB from '../../Assets/series-l2.glb';
 import ScrollToPlugin from 'gsap/dist/ScrollToPlugin';
-import WaterBottle from '../../Assets/water_bottle.glb';
 
 const SeriesL2 = () => {
 
@@ -23,11 +24,44 @@ const SeriesL2 = () => {
         z: 0
     })
 
+
     useEffect(() => {
 
         gsap.registerPlugin(ScrollToPlugin, ScrollTrigger)
 
+        gsap.set(['.series-l2-text', '.series-l2-subtext'], {
+            y: '100%',
+            opacity: 0
+        })
+
         let ctx = gsap.context(() => {
+
+            gsap.to(['.series-l2-text', '.series-l2-subtext'], {
+                y: 0,
+                opacity: 1,
+                duration: 1,
+                ease: 'power1.inOut',
+                stagger: 0.1,
+                scrollTrigger: {
+                    trigger: '.dot-matrix-container',
+                    start: 'center top',
+                    end: 'bottom bottom',
+                    scrub: 2
+                }
+            })
+
+            gsap.to('.hero-bottle', {
+                rotate: 75,
+                y: '-90%',
+                x: '100%',
+                ease: 'power1.inOut',
+                scrollTrigger: {
+                    trigger: '.hero-section',
+                    start: '30% top',
+                    end: 'bottom bottom',
+                    scrub: 3,
+                }
+            })
 
             gsap.set('.dot-matrix-text', {
                 x: '100%',
@@ -118,7 +152,7 @@ const SeriesL2 = () => {
         <div className='flex flex-col w-full overflow-x-hidden relative'>
 
 
-            <div className='w-full h-screen flex flex-col items-center justify-center lg:p-10 p-6 bg-black'>
+            <div className='w-full h-screen flex flex-col items-center justify-center lg:p-10 p-6 bg-black dot-matrix-container'>
 
                 <div className='w-full lg:h-44 h-20 relative overflow-x-hidden'>
 
@@ -137,14 +171,7 @@ const SeriesL2 = () => {
             </div>
 
 
-            <div className='w-full flex flex-col min-h-screen text-center relative py-10 active-lifestyle-section'>
-
-                {/* <div className='w-full h-full absolute top-0 left-0 z-10'>
-
-                    <img src="/series-l2/hero-background.jpeg" alt="hero_background" className='w-full h-full object-cover opacity-30' />
-
-                </div> */}
-
+            {/* <div className='w-full flex flex-col min-h-screen text-center relative py-10 active-lifestyle-section'>
 
                 <div className='flex flex-col z-20 relative'>
                     <div className='flex flex-col items-center justify-start lg:p-10 p-6'>
@@ -155,7 +182,37 @@ const SeriesL2 = () => {
 
                     <div className='lg:w-5/12 w-full mx-auto h-[550px] lifestyle-contents flex-shrink-0'>
                         <GLTFViewer noControls parallax modelPath={WaterBottle} />
-                        {/* <GLTF noControls rotation={rotation} modelPath={SeriesL2GLB} /> */}
+                        
+                    </div>
+                </div>
+
+            </div> */}
+
+            <div className={`flex flex-col w-full h-screen bg-gradient-to-b from-[#f2f2f2] to-[#808080]/30 items-center justify-center text-[5rem] font-semibold text-[#121212] hero-section relative`}>
+
+                <div className="w-full h-full object-contain hero-bottle z-[20] relative">
+
+                    <img src="/series-l2/person-holding-bottle.webp" alt="hero-bottle" className="w-full h-full object-cover object-bottom" />
+
+                </div>
+
+                <div className="w-full h-full z-[10] absolute top-0 left-0 flex flex-col items-center justify-start lg:p-16 p-10">
+
+                    <div className="flex items-center justify-center gap-2">
+                        {
+                            React.Children.toArray("Active Lifestyle Companion".split(' ').map(item => (
+                                <h2 className="3xl:text-lg lg:text-base text-sm font-semibold text-[#121212] series-l2-subtext">{item}</h2>
+                            )))
+                        }
+                    </div>
+
+                    <div className="flex items-center justify-center">
+                        {
+                            React.Children.toArray("SeriesL2".split('').map((item, index) => (
+                                <h1 className={`lg:text-9xl series-l2-text text-4xl font-bold text-[#676C6C] ${index === 5 ? 'mr-6' : ''}`}>{item}</h1>
+                            )))
+                        }
+
                     </div>
                 </div>
 
@@ -178,12 +235,13 @@ const SeriesL2 = () => {
                 <div className="lg:w-6/12 w-full h-full flex flex-col items-center justify-center pin-this-bottle lg:p-0 p-6">
 
                     <div className='w-full h-full flex-shrink-0'>
-                        <GLTF
-                            meshName="body"
-                            // videoPath={"/hero-desktop.mp4"}
-                            noControls={false}
-                            rotation={rotation}
-                            modelPath={SeriesL2GLB} />
+                        <Suspense fallback={<div />}>
+                            <GLTF
+                                meshName="body"
+                                noControls
+                                rotation={rotation}
+                                modelPath={SeriesL2GLB} />
+                        </Suspense>
                     </div>
 
                 </div>
