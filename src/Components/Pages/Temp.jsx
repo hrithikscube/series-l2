@@ -151,8 +151,6 @@ const Temp = () => {
 
             </div>
 
-
-
             {/* <div className="w-full mx-auto h-screen flex flex-col relative z-[20] live-life-section">
 
                 <div className="w-full h-full absolute top-0 left-0 flex flex-col items-center justify-center">
@@ -183,8 +181,6 @@ const Temp = () => {
                     </div>
                 ))
             } */}
-
-
 
 
         </div>
