@@ -1,10 +1,8 @@
 /* eslint-disable */
-
-// import GLTF from '../GLTF';
 import { lazy, Suspense } from 'react';
 
-const GLTF = lazy(() => import('../GLTF'))
 import gsap from 'gsap/dist/gsap';
+const GLTF = lazy(() => import('../GLTF'))
 import React, { useEffect, useState } from 'react';
 import ScrollTrigger from 'gsap/dist/ScrollTrigger';
 import SeriesL2GLB from '../../Assets/series-l2.glb';

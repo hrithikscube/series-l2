@@ -1,51 +1,51 @@
-import * as THREE from "three";
-import { Canvas } from "@react-three/fiber";
-import React, { useEffect, useRef } from "react";
+// import * as THREE from "three";
+// import { Canvas } from "@react-three/fiber";
+import React, { useEffect } from "react";
 
-import SeriesL2 from '../../Assets/series-l2.glb';
-import PhotoStudioEnv from '../../Assets/photostudio.hdr';
-import { Environment, OrbitControls, useGLTF } from "@react-three/drei";
+// import SeriesL2 from '../../Assets/series-l2.glb';
+// import PhotoStudioEnv from '../../Assets/photostudio.hdr';
+// import { Environment, OrbitControls, useGLTF } from "@react-three/drei";
 
 import gsap from 'gsap/dist/gsap'
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
 import ScrollToPlugin from "gsap/dist/ScrollToPlugin";
 
 
-const Model = ({ modelPath, videoPath, meshName }) => {
-    const groupRef = useRef();
-    const { scene } = useGLTF(modelPath);
+// const Model = ({ modelPath, videoPath, meshName }) => {
+//     const groupRef = useRef();
+//     const { scene } = useGLTF(modelPath);
 
-    useEffect(() => {
-        if (typeof videoPath !== 'undefined') {
-            const video = document.createElement("video");
-            video.src = videoPath;
-            video.loop = true;
-            video.muted = true; // Autoplay requirement
-            video.play();
+//     useEffect(() => {
+//         if (typeof videoPath !== 'undefined') {
+//             const video = document.createElement("video");
+//             video.src = videoPath;
+//             video.loop = true;
+//             video.muted = true; // Autoplay requirement
+//             video.play();
 
-            const videoTexture = new THREE.VideoTexture(video);
-            videoTexture.minFilter = THREE.LinearFilter;
-            videoTexture.magFilter = THREE.LinearFilter;
-            videoTexture.format = THREE.RGBAFormat;
+//             const videoTexture = new THREE.VideoTexture(video);
+//             videoTexture.minFilter = THREE.LinearFilter;
+//             videoTexture.magFilter = THREE.LinearFilter;
+//             videoTexture.format = THREE.RGBAFormat;
 
-            scene.traverse((child) => {
-                if (child.isMesh && child.name === meshName) {
-                    child.material = new THREE.MeshStandardMaterial({
-                        map: videoTexture,
-                    });
-                }
-            });
-        }
-    }, [modelPath, videoPath, scene, meshName]);
+//             scene.traverse((child) => {
+//                 if (child.isMesh && child.name === meshName) {
+//                     child.material = new THREE.MeshStandardMaterial({
+//                         map: videoTexture,
+//                     });
+//                 }
+//             });
+//         }
+//     }, [modelPath, videoPath, scene, meshName]);
 
-    // useFrame(() => {
-    //     if (groupRef.current) {
-    //         groupRef.current.rotation.y += 0.005; // Rotate model
-    //     }
-    // });
+//     // useFrame(() => {
+//     //     if (groupRef.current) {
+//     //         groupRef.current.rotation.y += 0.005; // Rotate model
+//     //     }
+//     // });
 
-    return <primitive ref={groupRef} object={scene} scale={12} position={[0, -1.5, 0]} />;
-};
+//     return <primitive ref={groupRef} object={scene} scale={12} position={[0, -1.5, 0]} />;
+// };
 
 const Temp = () => {
 
