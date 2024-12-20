@@ -6,6 +6,7 @@ import NotFound from './Components/Pages/NotFound';
 import Landing from './Components/Pages/Landing';
 import Test from './Components/Pages/Test';
 import Temp from './Components/Pages/Temp';
+import ProductLandingPage from './Components/Pages/ProductLandingPage';
 
 const App = () => {
   return (
@@ -14,6 +15,8 @@ const App = () => {
       <Route path='/series-l2' element={<SeriesL2 />} />
       <Route path='/home' element={<Home />} />
       <Route path='/test' element={<Test />} />
+      <Route path='/l2' element={<ProductLandingPage />} />
+
       <Route path='/temp' element={<Temp />} />
       <Route path='*' element={<NotFound />} />
 

@@ -1,53 +1,144 @@
-// import * as THREE from "three";
-// import { Canvas } from "@react-three/fiber";
-import React, { useEffect } from "react";
-
-// import SeriesL2 from '../../Assets/series-l2.glb';
-// import PhotoStudioEnv from '../../Assets/photostudio.hdr';
-// import { Environment, OrbitControls, useGLTF } from "@react-three/drei";
+import { Canvas, useFrame } from "@react-three/fiber";
+import React, { useEffect, useRef, useState } from "react";
+import { OrbitControls, useGLTF } from "@react-three/drei";
 
 import gsap from 'gsap/dist/gsap'
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
 import ScrollToPlugin from "gsap/dist/ScrollToPlugin";
 
+import WaterAnimation from '../../Assets/water_animation.glb';
+import WaterMdd from '../../Assets/water_animation.mdd'
 
-// const Model = ({ modelPath, videoPath, meshName }) => {
+import { MDDLoader } from "three/examples/jsm/loaders/MDDLoader";
+import { MeshStandardMaterial } from "three";
+
+import * as THREE from "three";
+
+const Model = ({ modelPath, meshName, triggerAnimation }) => {
+    const groupRef = useRef();
+    const { scene } = useGLTF(modelPath);
+    const clock = new THREE.Clock();
+
+    useEffect(() => {
+        scene.traverse((child) => {
+            if (child.isMesh && child.name === meshName) {
+                const geometry = child.geometry;
+
+                // Ensure the geometry has position attribute
+                const positionAttribute = geometry.attributes.position;
+                const vertexCount = positionAttribute.count;
+
+                // Save the original positions
+                const originalPositions = positionAttribute.array.slice();
+                const tempPositions = new Float32Array(originalPositions);
+
+                // Add the tempPositions to geometry for manipulation
+                positionAttribute.array = tempPositions;
+                positionAttribute.needsUpdate = true;
+
+                // Attach animation function to the mesh
+                // child.userData.animateVertices = (time) => {
+                //     for (let i = 0; i < vertexCount; i++) {
+                //         const x = originalPositions[i * 3];
+                //         const y = originalPositions[i * 3 + 1];
+                //         const z = originalPositions[i * 3 + 2];
+
+                //         // Simple wave animation
+                //         tempPositions[i * 3 + 2] = z + Math.sin(time + x * 2) * 0.1;
+                //         tempPositions[i * 3 + 1] = y + Math.cos(time + z * 2) * 0.09;
+                //     }
+                //     positionAttribute.needsUpdate = true;
+                // };
+
+                if (triggerAnimation) {
+                    child.userData.animateVertices = (time) => {
+                        for (let i = 0; i < vertexCount; i++) {
+                            const x = originalPositions[i * 3];
+                            const y = originalPositions[i * 3 + 1];
+                            const z = originalPositions[i * 3 + 2];
+
+                            // Strong wave animation (storm effect)
+                            const waveIntensityX = 0.1; // Increase for stronger wave heights
+                            const waveIntensityY = 0.1;
+                            const waveFrequency = 4;   // Higher values for choppier waves
+
+                            tempPositions[i * 3 + 2] = z + Math.sin(time * waveFrequency + x * 2) * waveIntensityX;
+                            tempPositions[i * 3 + 1] = y + Math.cos(time * waveFrequency + z * 2) * waveIntensityY;
+                        }
+                        positionAttribute.needsUpdate = true;
+                    };
+                }
+
+            }
+        });
+    }, [scene, meshName, triggerAnimation]);
+
+    useFrame(() => {
+        const elapsedTime = clock.getElapsedTime();
+
+        // Traverse the scene and animate vertices
+        scene.traverse((child) => {
+            if (child.name === 'Plane') {
+                child.visible = false
+            }
+
+            if (child.isMesh && child.name === meshName && child.userData.animateVertices) {
+                // child.material = new MeshStandardMaterial({ color: 0x0ea5e9 })
+                child.userData.animateVertices(elapsedTime);
+
+            }
+        });
+
+        // Rotate the model
+        // if (groupRef.current) {
+        //     groupRef.current.rotation.y += 0.01;
+        // }
+    });
+
+    return <primitive ref={groupRef} object={scene} scale={0.3} position={[0, 0, 0]} />;
+};
+
+
+// const Model = ({ modelPath, meshName, mddPath }) => {
 //     const groupRef = useRef();
 //     const { scene } = useGLTF(modelPath);
 
+//     useFrame(() => {
+//         if (groupRef.current) {
+//             // Rotate the model by a small increment on the Y-axis every frame
+//             groupRef.current.rotation.y += 0.01;
+//         }
+//     })
+
 //     useEffect(() => {
-//         if (typeof videoPath !== 'undefined') {
-//             const video = document.createElement("video");
-//             video.src = videoPath;
-//             video.loop = true;
-//             video.muted = true; // Autoplay requirement
-//             video.play();
+//         let animationData;
 
-//             const videoTexture = new THREE.VideoTexture(video);
-//             videoTexture.minFilter = THREE.LinearFilter;
-//             videoTexture.magFilter = THREE.LinearFilter;
-//             videoTexture.format = THREE.RGBAFormat;
-
-//             scene.traverse((child) => {
-//                 if (child.isMesh && child.name === meshName) {
-//                     child.material = new THREE.MeshStandardMaterial({
-//                         map: videoTexture,
-//                     });
-//                 }
+//         if (mddPath) {
+//             const loader = new MDDLoader();
+//             loader.load(mddPath, (data) => {
+//                 animationData = data;
 //             });
 //         }
-//     }, [modelPath, videoPath, scene, meshName]);
 
-//     // useFrame(() => {
-//     //     if (groupRef.current) {
-//     //         groupRef.current.rotation.y += 0.005; // Rotate model
-//     //     }
-//     // });
+//         scene.traverse((child) => {
+//             if (child.isMesh && child.name === meshName) {
+//                 child.material = new MeshStandardMaterial({ color: 0x7dd3fc })
+//                 // if (animationData) {
+//                 //     child.geometry.morphAttributes.position = animationData.morphTargets;
+//                 // }
+//             }
+//         });
 
-//     return <primitive ref={groupRef} object={scene} scale={12} position={[0, -1.5, 0]} />;
+
+
+//     }, [modelPath, scene, meshName, mddPath]);
+
+//     return <primitive ref={groupRef} object={scene} scale={0.19} position={[0, 0, 0]} />;
 // };
 
 const Temp = () => {
+
+    const [triggerAnimation, setTriggerAnimation] = useState(false)
 
     useEffect(() => {
 
@@ -75,11 +166,6 @@ const Temp = () => {
             stagger: 0.1
         })
 
-        gsap.set('.series-l2-bottle', {
-            y: '50%',
-            x: '50%',
-        })
-
         let ctx = gsap.context(() => {
 
             gsap.to('.hero-bottle', {
@@ -92,23 +178,27 @@ const Temp = () => {
                     start: '30% top',
                     end: 'bottom bottom',
                     scrub: 3,
-                }
+                },
+
             })
 
-
-            gsap.to('.series-l2-bottle', {
-                x: 0,
-                y: 0,
-                ease: "power1.inOut",
-                duration: 2,
+            gsap.to('.water-section', {
                 scrollTrigger: {
-                    trigger: '.live-life-section',
-                    pin: '.live-life-section',
+                    trigger: '.water-section',
                     start: 'top top',
                     end: 'bottom bottom',
-                    // markers: true,
-                    scrub: 2
-                }
+                    markers: true,
+                    scrub: 2,
+                    onUpdate: (self) => {
+                        if (self.progress === 0) {
+                            setTriggerAnimation(false)
+                        }
+                        else {
+                            setTriggerAnimation(true)
+                        }
+                    }
+                },
+
             })
 
         })
@@ -151,37 +241,18 @@ const Temp = () => {
 
             </div>
 
-            {/* <div className="w-full mx-auto h-screen flex flex-col relative z-[20] live-life-section">
-
-                <div className="w-full h-full absolute top-0 left-0 flex flex-col items-center justify-center">
-
-                    <h2 className="3xl:text-lg lg:text-base text-sm font-medium text-[#121212]">Introducing Series L2</h2>
-                    <h2 className="3xl:text-5xl lg:text-4xl text-2xl font-bold text-[#121212] lg:w-4/12 mx-auto text-center">Designed for those who live life on the go</h2>
-
-                </div>
-
-                <div className="w-1/2 h-full series-l2-bottle debug">
-                    <Canvas camera={{ position: [2, 1, 3] }}>
-                        <ambientLight intensity={1} />
-                        <directionalLight position={[0.145, 0.2, 0.015]} intensity={0.8} />
-                        <Model
-                            modelPath={SeriesL2}
-                            meshName="body" />
-                        <Environment files={PhotoStudioEnv} background={false} />
-                        <OrbitControls />
-                    </Canvas>
-                </div>
+            <div className="w-full h-screen water-section debug">
+                <Canvas camera={{ position: [1, 1, 1] }}>
+                    <ambientLight intensity={1} />
+                    <directionalLight position={[0.145, 0.2, 0.015]} intensity={0.8} />
+                    <Model
+                        triggerAnimation={triggerAnimation}
+                        mddPath={WaterMdd}
+                        modelPath={WaterAnimation}
+                        meshName="Cylinder" />
+                    {/* <OrbitControls /> */}
+                </Canvas>
             </div>
-            {
-                [...Array(10)].map((item, index) => (
-                    <div className={`flex flex-col w-full h-screen ${index % 2 === 0 ? 'bg-blue-200' : 'bg-red-200'} items-center justify-center text-[5rem] font-semibold text-[#121212] z-[30] relative`}>
-
-                        Section {index + 1}
-
-                    </div>
-                ))
-            } */}
-
 
         </div>
     );
