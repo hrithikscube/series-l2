@@ -7,10 +7,10 @@ import ScrollTrigger from "gsap/dist/ScrollTrigger";
 import ScrollToPlugin from "gsap/dist/ScrollToPlugin";
 
 import WaterAnimation from '../../Assets/water_animation.glb';
-import WaterMdd from '../../Assets/water_animation.mdd'
+import WaterLayer from '../../Assets/water_layer.glb'
+// import WaterMdd from '../../Assets/water_animation.mdd'
 
-import { MDDLoader } from "three/examples/jsm/loaders/MDDLoader";
-import { MeshStandardMaterial } from "three";
+// import { MeshStandardMaterial } from "three";
 
 import * as THREE from "three";
 
@@ -36,20 +36,6 @@ const Model = ({ modelPath, meshName, triggerAnimation }) => {
                 positionAttribute.array = tempPositions;
                 positionAttribute.needsUpdate = true;
 
-                // Attach animation function to the mesh
-                // child.userData.animateVertices = (time) => {
-                //     for (let i = 0; i < vertexCount; i++) {
-                //         const x = originalPositions[i * 3];
-                //         const y = originalPositions[i * 3 + 1];
-                //         const z = originalPositions[i * 3 + 2];
-
-                //         // Simple wave animation
-                //         tempPositions[i * 3 + 2] = z + Math.sin(time + x * 2) * 0.1;
-                //         tempPositions[i * 3 + 1] = y + Math.cos(time + z * 2) * 0.09;
-                //     }
-                //     positionAttribute.needsUpdate = true;
-                // };
-
                 if (triggerAnimation) {
                     child.userData.animateVertices = (time) => {
                         for (let i = 0; i < vertexCount; i++) {
@@ -60,10 +46,10 @@ const Model = ({ modelPath, meshName, triggerAnimation }) => {
                             // Strong wave animation (storm effect)
                             const waveIntensityX = 0.1; // Increase for stronger wave heights
                             const waveIntensityY = 0.1;
-                            const waveFrequency = 4;   // Higher values for choppier waves
+                            const waveFrequency = 12;   // Higher values for choppier waves
 
-                            tempPositions[i * 3 + 2] = z + Math.sin(time * waveFrequency + x * 2) * waveIntensityX;
-                            tempPositions[i * 3 + 1] = y + Math.cos(time * waveFrequency + z * 2) * waveIntensityY;
+                            // tempPositions[i * 3 + 2] = z + Math.sin(time * waveFrequency + x * 2) * waveIntensityX;
+                            tempPositions[i * 3 + 1] = y + Math.sin(time * waveFrequency + z * 2) * waveIntensityY;
                         }
                         positionAttribute.needsUpdate = true;
                     };
@@ -83,7 +69,7 @@ const Model = ({ modelPath, meshName, triggerAnimation }) => {
             }
 
             if (child.isMesh && child.name === meshName && child.userData.animateVertices) {
-                // child.material = new MeshStandardMaterial({ color: 0x0ea5e9 })
+                child.material = new THREE.MeshStandardMaterial({ color: 0x0ea5e9 })
                 child.userData.animateVertices(elapsedTime);
 
             }
@@ -98,43 +84,6 @@ const Model = ({ modelPath, meshName, triggerAnimation }) => {
     return <primitive ref={groupRef} object={scene} scale={0.3} position={[0, 0, 0]} />;
 };
 
-
-// const Model = ({ modelPath, meshName, mddPath }) => {
-//     const groupRef = useRef();
-//     const { scene } = useGLTF(modelPath);
-
-//     useFrame(() => {
-//         if (groupRef.current) {
-//             // Rotate the model by a small increment on the Y-axis every frame
-//             groupRef.current.rotation.y += 0.01;
-//         }
-//     })
-
-//     useEffect(() => {
-//         let animationData;
-
-//         if (mddPath) {
-//             const loader = new MDDLoader();
-//             loader.load(mddPath, (data) => {
-//                 animationData = data;
-//             });
-//         }
-
-//         scene.traverse((child) => {
-//             if (child.isMesh && child.name === meshName) {
-//                 child.material = new MeshStandardMaterial({ color: 0x7dd3fc })
-//                 // if (animationData) {
-//                 //     child.geometry.morphAttributes.position = animationData.morphTargets;
-//                 // }
-//             }
-//         });
-
-
-
-//     }, [modelPath, scene, meshName, mddPath]);
-
-//     return <primitive ref={groupRef} object={scene} scale={0.19} position={[0, 0, 0]} />;
-// };
 
 const Temp = () => {
 
@@ -247,7 +196,7 @@ const Temp = () => {
                     <directionalLight position={[0.145, 0.2, 0.015]} intensity={0.8} />
                     <Model
                         triggerAnimation={triggerAnimation}
-                        mddPath={WaterMdd}
+                        // mddPath={WaterMdd}
                         modelPath={WaterAnimation}
                         meshName="Cylinder" />
                     {/* <OrbitControls /> */}
