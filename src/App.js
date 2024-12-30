@@ -7,6 +7,7 @@ import Landing from './Components/Pages/Landing';
 import Test from './Components/Pages/Test';
 import Temp from './Components/Pages/Temp';
 import ProductLandingPage from './Components/Pages/ProductLandingPage';
+import PhysicsTest from './Components/Pages/PhysicsTest';
 
 const App = () => {
   return (
@@ -18,6 +19,8 @@ const App = () => {
       <Route path='/l2' element={<ProductLandingPage />} />
 
       <Route path='/temp' element={<Temp />} />
+      <Route path='/physics' element={<PhysicsTest />} />
+
       <Route path='*' element={<NotFound />} />
 
     </Routes>
