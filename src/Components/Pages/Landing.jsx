@@ -1,8 +1,8 @@
 import gsap from 'gsap/dist/gsap';
 import { useNavigate } from 'react-router-dom';
-import React, { useEffect, useRef, useState } from 'react';
 import ScrollTrigger from 'gsap/dist/ScrollTrigger';
 import ScrollToPlugin from 'gsap/dist/ScrollToPlugin';
+import React, { useEffect, useRef, useState } from 'react';
 
 const Landing = () => {
 

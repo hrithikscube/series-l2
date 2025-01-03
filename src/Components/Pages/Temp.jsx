@@ -1,13 +1,44 @@
-import React, { useEffect, useRef } from "react";
-import { Canvas } from "@react-three/fiber";
-import PhotoStudio from '../../Assets/photostudio.hdr';
-import { Environment, useGLTF } from "@react-three/drei";
-import BottleWithHand from '../../Assets/bottle-with-hand.glb';
 import { TextureLoader } from "three";
+import { Canvas, useThree } from "@react-three/fiber";
+import React, { useEffect, useRef } from "react";
+import PhotoStudio from '../../Assets/photostudio.hdr';
+import { Environment, OrbitControls, useGLTF } from "@react-three/drei";
+import BottleWithHand from '../../Assets/bottle-with-hand-new.glb';
+import StudioExr from '../../Assets/studio_small_02_1k.exr';
 
 import gsap from "gsap/dist/gsap";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
 import ScrollToPlugin from "gsap/dist/ScrollToPlugin";
+
+import { EXRLoader } from "three/examples/jsm/loaders/EXRLoader";
+import { PMREMGenerator } from "three";
+import { sRGBEncoding } from "@react-three/drei/helpers/deprecated";
+
+const EnvironmentWithEXR = ({ exrPath }) => {
+    const { gl, scene } = useThree();
+
+    useEffect(() => {
+        const loader = new EXRLoader();
+        const pmremGenerator = new PMREMGenerator(gl);
+        pmremGenerator.compileEquirectangularShader();
+
+        loader.load(exrPath, (texture) => {
+            texture.encoding = sRGBEncoding;
+            const envMap = pmremGenerator.fromEquirectangular(texture).texture;
+            scene.environment = envMap;
+            scene.background = envMap; // Set as background
+            texture.dispose();
+            pmremGenerator.dispose();
+        });
+
+        return () => {
+            scene.environment?.dispose();
+            scene.background?.dispose();
+        };
+    }, [exrPath, gl, scene]);
+
+    return null;
+};
 
 
 const Model = ({ modelPath, texturePath, targetMeshName }) => {
@@ -62,9 +93,10 @@ const Temp = () => {
             <div className="w-full h-screen hero-section">
                 <div className="w-full h-full flex-shrink-0 flex flex-col items-center justify-center">
                     <Canvas>
-                        <Environment files={PhotoStudio} />
+                        {/* <Environment files={PhotoStudio} background /> */}
                         <Model texturePath="/series-l2/water-texture.jpeg" modelPath={BottleWithHand} targetMeshName="water" />
-                        {/* <OrbitControls /> */}
+                        <EnvironmentWithEXR exrPath={StudioExr} />
+                        <OrbitControls />
                     </Canvas>
                 </div>
             </div>
