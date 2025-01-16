@@ -1,8 +1,9 @@
-import React, { useRef } from 'react'
-import Studio from '../assets/studio-lights.exr'
-import SeriesL2 from '../assets/series-l2.glb'
-import { Environment, OrbitControls, useGLTF } from '@react-three/drei'
-import { Canvas } from '@react-three/fiber'
+'use client'
+import React, { useRef } from 'react';
+import { Canvas } from '@react-three/fiber';
+import SeriesL2 from '../assets/series-l2.glb';
+import Studio from '../assets/studio-lights.exr';
+import { Environment, OrbitControls, useGLTF } from '@react-three/drei';
 
 
 const Model = ({ modelPath }) => {
