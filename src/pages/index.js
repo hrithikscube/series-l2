@@ -1,8 +1,6 @@
 'use client'
 import React, { useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
-import seriesl2 from '../assets/series-l2.glb';
-import studio from '../assets/studio-lights.exr';
 import { Environment, OrbitControls, useGLTF } from '@react-three/drei';
 
 
@@ -21,8 +19,8 @@ const Home = () => {
     <div className='flex flex-col items-center justify-center w-full h-screen'>
 
       <Canvas>
-        <Model modelPath={seriesl2} />
-        <Environment files={studio} />
+        <Model modelPath={"/assets/series-l2.glb"} />
+        <Environment files={"/assets/studio-lights.exr"} />
         <OrbitControls />
       </Canvas>
 
