@@ -4,7 +4,7 @@ const nextConfig = {
   webpack: (config, { isServer }) => {
     // Add a rule for .glb and .hdr files
     config.module.rules.push({
-      test: /\.(glb|hdr|exr|gltf)$/,
+      test: /\.(glb|hdr|exr|gltf|fbx)$/,
       type: 'asset/resource',
     });
 

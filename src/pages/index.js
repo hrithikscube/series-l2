@@ -10,7 +10,7 @@ const Model = ({ modelPath }) => {
 
   const groupRef = useRef()
 
-  return <primitive ref={groupRef} object={scene.clone()} scale={1} position={[0, 0, 0]} />
+  return <primitive ref={groupRef} object={scene.clone()} scale={12} position={[0, -1, 0]} />
 
 }
 
